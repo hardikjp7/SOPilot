@@ -1,0 +1,154 @@
+{
+  "run_id": "RUN-9f3f77f18ec0",
+  "parsed": {
+    "alert_id": "ALR-PHI",
+    "source": "synthetic-mail",
+    "timestamp": "2026-11-18T09:00:00Z",
+    "attack_type": "phishing",
+    "severity": "high",
+    "confidence": 0.98,
+    "summary": "The message shows classic phishing indicators: sender and reply-to mismatch, a deceptive display name, failed SPF/DKIM/DMARC authentication, and a login URL that differs from the displayed destination. The recipient reported clicking the link and noticing the sign-in page address changed, but they did not enter any information, so credential compromise is not confirmed.",
+    "iocs": {
+      "ips": [
+        "203.0.113.42"
+      ],
+      "domains": [
+        "example.com",
+        "example.net",
+        "example.org",
+        "mail.example.org",
+        "relay.example.net",
+        "documents.example.org",
+        "review.example.net"
+      ],
+      "urls": [
+        "https://example.com/login",
+        "https://documents.example.org/review",
+        "https://review.example.net/session"
+      ],
+      "hashes": [],
+      "emails": [
+        "sender@example.com",
+        "review-desk@example.net",
+        "analyst@example.org",
+        "synthetic-msg-0042@example.com"
+      ],
+      "users": [],
+      "cve_ids": [
+        "CVE-2099-900002"
+      ],
+      "resources": []
+    },
+    "evidence_fields": [
+      "$.message.from",
+      "$.message.replyTo",
+      "$.message.display_name",
+      "$.message.subject",
+      "$.message.url",
+      "$.message.headers[\"Authentication-Results\"]",
+      "$.message.links[0].display",
+      "$.message.links[0].href",
+      "$.message.links[0].redirects[0]",
+      "$.userReport.comment",
+      "$.userReport.clicked"
+    ],
+    "redacted": true
+  },
+  "checklist": {
+    "alert_id": "ALR-PHI",
+    "status": "grounded",
+    "playbook_id": "PB-PHI",
+    "retrieval_confidence": 0.41280859277300064,
+    "steps": [
+      {
+        "order": 1,
+        "action": "Review the reported message headers and URL in the mail security console. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+        "rationale": "Supported by the alert summary and evidence fields showing header-authentication failures, sender/reply-to mismatch, and URL/display mismatch in the reported message.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-01",
+          "source_text": "PB-PHI-01 | Detect | Review the reported message headers and URL in the mail security console. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "supported"
+      },
+      {
+        "order": 2,
+        "action": "Quarantine the reported message using the mail security console. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+        "rationale": "Supported by the high-confidence phishing indicators in the alert and the reported message evidence, making containment of the reported message appropriate.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-02",
+          "source_text": "PB-PHI-02 | Contain | Quarantine the reported message using the mail security console. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "supported"
+      },
+      {
+        "order": 3,
+        "action": "Review sign-in logs for the reported account for suspicious activity. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+        "rationale": "Supported because the recipient reported clicking the link and observing a changed sign-in page address, so account activity should be checked even though credential entry is not confirmed.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-03",
+          "source_text": "PB-PHI-03 | Investigate | Review sign-in logs for the reported account for suspicious activity. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "supported"
+      },
+      {
+        "order": 4,
+        "action": "Search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+        "rationale": "Supported by the alert-provided sender and URL indicators, which can be used to identify additional matching phishing messages and affected recipients.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-05",
+          "source_text": "PB-PHI-05 | Investigate | Search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients. | Mail Security Analyst"
+        },
+        "verified": true,
+        "support": "supported"
+      },
+      {
+        "order": 5,
+        "action": "After analyst confirmation, block the malicious sender and URL in the mail security controls with an expiry and rollback owner. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+        "rationale": "Supported after analyst confirmation because the alert contains multiple phishing indicators and concrete sender/URL artifacts suitable for a controlled block with expiry and rollback owner preserved.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-06",
+          "source_text": "PB-PHI-06 | Contain | After analyst confirmation, block the malicious sender and URL in the mail security controls with an expiry and rollback owner. | Mail Security Administrator"
+        },
+        "verified": true,
+        "support": "supported"
+      },
+      {
+        "order": 6,
+        "action": "Confirm that affected users can sign in safely and monitor their accounts for repeated suspicious activity. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+        "rationale": "Supported as a recovery step if affected recipients are identified or suspicious activity is found, especially given the reported click and possible exposure to a deceptive sign-in page.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-09",
+          "source_text": "PB-PHI-09 | Recover | Confirm that affected users can sign in safely and monitor their accounts for repeated suspicious activity. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "supported"
+      }
+    ],
+    "related_cves": [
+      {
+        "id": "CVE-2099-900002",
+        "severity": "medium",
+        "cvss": 6.1,
+        "remediation": "Enable final-destination inspection in the lab build and rescan affected synthetic messages."
+      }
+    ],
+    "escalation_note": "",
+    "dropped_count": 0
+  },
+  "timings_ms": {
+    "parse": 2389.9434850000034,
+    "retrieve": 2387.0304929999975,
+    "generate": 10794.528201000048,
+    "verify": 1858.901263000007,
+    "total": 17430.65892900006
+  }
+}

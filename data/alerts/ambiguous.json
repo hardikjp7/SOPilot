@@ -1,0 +1,24 @@
+{
+  "alert_id": "ALR-AMBIGUOUS",
+  "source": "synthetic-mail",
+  "synthetic": true,
+  "priority": "review",
+  "message": "Possible suspicious message; no headers or URLs supplied.",
+  "report": {
+    "submitted_by": "lab-user-003",
+    "channel": "helpdesk",
+    "text": "A browser tab opened while I was checking a document reminder. It could have been an expected notification; I do not have the message anymore.",
+    "sender": null,
+    "link": "",
+    "opened_attachment": "not sure"
+  },
+  "device": {"name": "review-host.example.org", "last_ip": "192.0.2.44"},
+  "signals": [
+    {"name": "user_report", "confidence": 0.52},
+    {"name": "endpoint_scan", "result": "no_findings"},
+    {"name": "sign_in_review", "result": "not_available"}
+  ],
+  "received_local": "09:12, timezone not supplied",
+  "correlation": {"mail_message_id": null, "related_alerts": []},
+  "comment": "Insufficient evidence to establish a phishing attempt, account compromise, or another supported incident type. Synthetic exercise only."
+}

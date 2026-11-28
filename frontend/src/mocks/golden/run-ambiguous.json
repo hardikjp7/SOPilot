@@ -1,0 +1,59 @@
+{
+  "run_id": "RUN-9cd4202003d5",
+  "parsed": {
+    "alert_id": "ALR-AMBIGUOUS",
+    "source": "synthetic-mail",
+    "timestamp": null,
+    "attack_type": "unknown",
+    "severity": "low",
+    "confidence": 0.94,
+    "summary": "The report describes a possibly suspicious browser tab opening, but it explicitly lacks headers, URLs, sender details, and confirmation of a malicious message or attachment. Available signals show no endpoint findings and no available sign-in review, so the evidence is insufficient to establish phishing or another supported incident type.",
+    "iocs": {
+      "ips": [
+        "192.0.2.44"
+      ],
+      "domains": [
+        "review-host.example.org"
+      ],
+      "urls": [],
+      "hashes": [],
+      "emails": [],
+      "users": [
+        "lab-user-003"
+      ],
+      "cve_ids": [],
+      "resources": []
+    },
+    "evidence_fields": [
+      "$.report",
+      "$.report.text",
+      "$.report.sender",
+      "$.report.link",
+      "$.report.opened_attachment",
+      "$.signals",
+      "$.signals[0].name",
+      "$.signals[0].confidence",
+      "$.signals[1].result",
+      "$.signals[2].result",
+      "$.comment"
+    ],
+    "redacted": true
+  },
+  "checklist": {
+    "alert_id": "ALR-AMBIGUOUS",
+    "status": "no_matching_sop",
+    "playbook_id": null,
+    "retrieval_confidence": 0.42539944159100873,
+    "steps": [],
+    "related_cves": [],
+    "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+    "dropped_count": 0
+  },
+  "timings_ms": {
+    "parse": 1906.6674330000524,
+    "retrieve": 202.987687000018,
+    "generate": 0.031169999942903814,
+    "verify": 0.03540099999099766,
+    "total": 2109.8477040000034
+  }
+}

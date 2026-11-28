@@ -1,0 +1,902 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ParsedAlertCard > matches the no-match fixture card snapshot 1`] = `
+<section
+  aria-busy="false"
+  aria-label="Parsed alert"
+  class="min-w-0 overflow-hidden rounded-2xl border border-outline/30 bg-panel shadow-sm"
+>
+  <div
+    class="flex items-center justify-between gap-3 border-b border-outline/20 p-5"
+  >
+    <h2
+      class="text-lg font-semibold tracking-tight"
+    >
+      Parsed alert
+    </h2>
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-file-search text-muted"
+      fill="none"
+      height="19"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="19"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 2v4a2 2 0 0 0 2 2h4"
+      />
+      <path
+        d="M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3"
+      />
+      <path
+        d="m9 18-1.5-1.5"
+      />
+      <circle
+        cx="5"
+        cy="14"
+        r="3"
+      />
+    </svg>
+  </div>
+  <div
+    class="space-y-5 p-5"
+  >
+    <div>
+      <p
+        class="break-all font-mono text-sm font-medium"
+      >
+        DLP-3320
+      </p>
+      <dl
+        class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted"
+      >
+        <div
+          class="flex gap-1"
+        >
+          <dt>
+            Source:
+          </dt>
+          <dd
+            class="break-all"
+          >
+            EndpointDLP
+          </dd>
+        </div>
+        <div
+          class="flex gap-1"
+        >
+          <dt>
+            Timestamp:
+          </dt>
+          <dd
+            class="break-all"
+          >
+            Not provided
+          </dd>
+        </div>
+      </dl>
+    </div>
+    <div
+      class="flex flex-wrap gap-2"
+    >
+      <span
+        class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium border-outline/40 bg-canvas text-muted"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-circle-help"
+          fill="none"
+          height="13"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="13"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+          />
+          <path
+            d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"
+          />
+          <path
+            d="M12 17h.01"
+          />
+        </svg>
+        <span
+          class="sr-only"
+        >
+          Attack type: 
+        </span>
+        Unknown
+      </span>
+      <span
+        class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium border-severity-medium/40 bg-severity-medium/10 text-severity-medium"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-triangle-alert"
+          fill="none"
+          height="13"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="13"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+          />
+          <path
+            d="M12 9v4"
+          />
+          <path
+            d="M12 17h.01"
+          />
+        </svg>
+        <span
+          class="sr-only"
+        >
+          Severity: 
+        </span>
+        Medium
+      </span>
+    </div>
+    <div>
+      <div
+        class="mb-2 flex items-center justify-between gap-2 text-xs"
+      >
+        <p
+          class="text-muted"
+        >
+          Classification confidence
+        </p>
+        <p
+          class="font-mono"
+        >
+          41%
+        </p>
+      </div>
+      <div
+        aria-label="Classification confidence"
+        aria-valuemax="1"
+        aria-valuemin="0"
+        aria-valuenow="0.41"
+        aria-valuetext="41%"
+        class="h-1.5 overflow-hidden rounded-full bg-outline/25"
+        role="meter"
+      >
+        <div
+          aria-hidden="true"
+          class="h-full rounded-full bg-muted"
+          style="width:41%"
+        />
+      </div>
+    </div>
+    <p
+      class="break-words text-sm leading-7"
+    >
+      A large copy of confidential files to a USB drive was logged for one user.
+    </p>
+    <div>
+      <h3
+        class="mb-2 text-sm font-semibold"
+      >
+        Evidence fields
+      </h3>
+      <ul
+        class="flex flex-wrap gap-2"
+      >
+        <li
+          class="max-w-full rounded bg-canvas px-2 py-1"
+        >
+          <code
+            class="break-all font-mono text-xs text-muted"
+          >
+            event
+          </code>
+        </li>
+        <li
+          class="max-w-full rounded bg-canvas px-2 py-1"
+        >
+          <code
+            class="break-all font-mono text-xs text-muted"
+          >
+            size_mb
+          </code>
+        </li>
+      </ul>
+    </div>
+    <p
+      class="flex items-center gap-2 rounded-lg border border-outline/25 bg-canvas/50 p-3 text-xs leading-5 text-muted"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-shield-check shrink-0"
+        fill="none"
+        height="15"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="15"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+        />
+        <path
+          d="m9 12 2 2 4-4"
+        />
+      </svg>
+      Redaction applied during processing.
+    </p>
+    <div
+      class="border-t border-outline/20 pt-5"
+    >
+      <section
+        aria-labelledby=":Ru:-heading"
+      >
+        <div
+          class="mb-4 flex flex-wrap items-center justify-between gap-2"
+        >
+          <h3
+            class="text-sm font-semibold"
+            id=":Ru:-heading"
+          >
+            Indicators of compromise
+          </h3>
+          <p
+            class="text-xs text-muted"
+          >
+            Click an indicator to copy
+          </p>
+        </div>
+        <div
+          class="space-y-4"
+        >
+          <div
+            aria-labelledby=":Ru:-users"
+            role="group"
+          >
+            <h4
+              class="mb-2 text-xs font-medium text-muted"
+              id=":Ru:-users"
+            >
+              Users
+            </h4>
+            <ul
+              class="flex flex-wrap gap-2"
+            >
+              <li
+                class="min-w-0 max-w-full"
+              >
+                <button
+                  aria-label="Copy r.nair"
+                  class="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md border border-outline bg-canvas px-2.5 py-2 text-left hover:border-accent"
+                  type="button"
+                >
+                  <span
+                    class="min-w-0 select-text break-all font-mono text-xs leading-5"
+                  >
+                    r.nair
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-copy mt-1 shrink-0 text-muted"
+                    fill="none"
+                    height="13"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="13"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      height="14"
+                      rx="2"
+                      ry="2"
+                      width="14"
+                      x="8"
+                      y="8"
+                    />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div
+            aria-labelledby=":Ru:-resources"
+            role="group"
+          >
+            <h4
+              class="mb-2 text-xs font-medium text-muted"
+              id=":Ru:-resources"
+            >
+              Resources
+            </h4>
+            <ul
+              class="flex flex-wrap gap-2"
+            >
+              <li
+                class="min-w-0 max-w-full"
+              >
+                <button
+                  aria-label="Copy HR-LT-031"
+                  class="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md border border-outline bg-canvas px-2.5 py-2 text-left hover:border-accent"
+                  type="button"
+                >
+                  <span
+                    class="min-w-0 select-text break-all font-mono text-xs leading-5"
+                  >
+                    HR-LT-031
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-copy mt-1 shrink-0 text-muted"
+                    fill="none"
+                    height="13"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="13"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      height="14"
+                      rx="2"
+                      ry="2"
+                      width="14"
+                      x="8"
+                      y="8"
+                    />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p
+          aria-live="polite"
+          class="mt-2 min-h-5 break-words text-xs leading-5 text-muted"
+          role="status"
+        />
+      </section>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`ParsedAlertCard > matches the ransomware fixture card snapshot 1`] = `
+<section
+  aria-busy="false"
+  aria-label="Parsed alert"
+  class="min-w-0 overflow-hidden rounded-2xl border border-outline/30 bg-panel shadow-sm"
+>
+  <div
+    class="flex items-center justify-between gap-3 border-b border-outline/20 p-5"
+  >
+    <h2
+      class="text-lg font-semibold tracking-tight"
+    >
+      Parsed alert
+    </h2>
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-file-search text-muted"
+      fill="none"
+      height="19"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="19"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 2v4a2 2 0 0 0 2 2h4"
+      />
+      <path
+        d="M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3"
+      />
+      <path
+        d="m9 18-1.5-1.5"
+      />
+      <circle
+        cx="5"
+        cy="14"
+        r="3"
+      />
+    </svg>
+  </div>
+  <div
+    class="space-y-5 p-5"
+  >
+    <div>
+      <p
+        class="break-all font-mono text-sm font-medium"
+      >
+        EDR-77310
+      </p>
+      <dl
+        class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted"
+      >
+        <div
+          class="flex gap-1"
+        >
+          <dt>
+            Source:
+          </dt>
+          <dd
+            class="break-all"
+          >
+            EDR
+          </dd>
+        </div>
+        <div
+          class="flex gap-1"
+        >
+          <dt>
+            Timestamp:
+          </dt>
+          <dd
+            class="break-all"
+          >
+            2026-11-17T02:41:09Z
+          </dd>
+        </div>
+      </dl>
+    </div>
+    <div
+      class="flex flex-wrap gap-2"
+    >
+      <span
+        class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium border-accent/30 bg-accent/5 text-accent"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-scan-line"
+          fill="none"
+          height="13"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="13"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 7V5a2 2 0 0 1 2-2h2"
+          />
+          <path
+            d="M17 3h2a2 2 0 0 1 2 2v2"
+          />
+          <path
+            d="M21 17v2a2 2 0 0 1-2 2h-2"
+          />
+          <path
+            d="M7 21H5a2 2 0 0 1-2-2v-2"
+          />
+          <path
+            d="M7 12h10"
+          />
+        </svg>
+        <span
+          class="sr-only"
+        >
+          Attack type: 
+        </span>
+        Ransomware
+      </span>
+      <span
+        class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium border-severity-critical/40 bg-severity-critical/10 text-severity-critical"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-triangle-alert"
+          fill="none"
+          height="13"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="13"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+          />
+          <path
+            d="M12 9v4"
+          />
+          <path
+            d="M12 17h.01"
+          />
+        </svg>
+        <span
+          class="sr-only"
+        >
+          Severity: 
+        </span>
+        Critical
+      </span>
+    </div>
+    <div>
+      <div
+        class="mb-2 flex items-center justify-between gap-2 text-xs"
+      >
+        <p
+          class="text-muted"
+        >
+          Classification confidence
+        </p>
+        <p
+          class="font-mono"
+        >
+          96%
+        </p>
+      </div>
+      <div
+        aria-label="Classification confidence"
+        aria-valuemax="1"
+        aria-valuemin="0"
+        aria-valuenow="0.96"
+        aria-valuetext="96%"
+        class="h-1.5 overflow-hidden rounded-full bg-outline/25"
+        role="meter"
+      >
+        <div
+          aria-hidden="true"
+          class="h-full rounded-full bg-accent"
+          style="width:96%"
+        />
+      </div>
+    </div>
+    <p
+      class="break-words text-sm leading-7"
+    >
+      Mass file renames with a .locked extension and shadow copy deletion on FIN-WS-014 indicate active ransomware encryption. A ransom note was dropped on the host.
+    </p>
+    <div>
+      <h3
+        class="mb-2 text-sm font-semibold"
+      >
+        Evidence fields
+      </h3>
+      <ul
+        class="flex flex-wrap gap-2"
+      >
+        <li
+          class="max-w-full rounded bg-canvas px-2 py-1"
+        >
+          <code
+            class="break-all font-mono text-xs text-muted"
+          >
+            alerts[0].type
+          </code>
+        </li>
+        <li
+          class="max-w-full rounded bg-canvas px-2 py-1"
+        >
+          <code
+            class="break-all font-mono text-xs text-muted"
+          >
+            alerts[1].cmd
+          </code>
+        </li>
+        <li
+          class="max-w-full rounded bg-canvas px-2 py-1"
+        >
+          <code
+            class="break-all font-mono text-xs text-muted"
+          >
+            ransom_note
+          </code>
+        </li>
+      </ul>
+    </div>
+    <p
+      class="flex items-center gap-2 rounded-lg border border-outline/25 bg-canvas/50 p-3 text-xs leading-5 text-muted"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-shield-check shrink-0"
+        fill="none"
+        height="15"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="15"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+        />
+        <path
+          d="m9 12 2 2 4-4"
+        />
+      </svg>
+      Redaction applied during processing.
+    </p>
+    <div
+      class="border-t border-outline/20 pt-5"
+    >
+      <section
+        aria-labelledby=":Ru:-heading"
+      >
+        <div
+          class="mb-4 flex flex-wrap items-center justify-between gap-2"
+        >
+          <h3
+            class="text-sm font-semibold"
+            id=":Ru:-heading"
+          >
+            Indicators of compromise
+          </h3>
+          <p
+            class="text-xs text-muted"
+          >
+            Click an indicator to copy
+          </p>
+        </div>
+        <div
+          class="space-y-4"
+        >
+          <div
+            aria-labelledby=":Ru:-ips"
+            role="group"
+          >
+            <h4
+              class="mb-2 text-xs font-medium text-muted"
+              id=":Ru:-ips"
+            >
+              IP addresses
+            </h4>
+            <ul
+              class="flex flex-wrap gap-2"
+            >
+              <li
+                class="min-w-0 max-w-full"
+              >
+                <button
+                  aria-label="Copy 198.51.100.23"
+                  class="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md border border-outline bg-canvas px-2.5 py-2 text-left hover:border-accent"
+                  type="button"
+                >
+                  <span
+                    class="min-w-0 select-text break-all font-mono text-xs leading-5"
+                  >
+                    198.51.100.23
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-copy mt-1 shrink-0 text-muted"
+                    fill="none"
+                    height="13"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="13"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      height="14"
+                      rx="2"
+                      ry="2"
+                      width="14"
+                      x="8"
+                      y="8"
+                    />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div
+            aria-labelledby=":Ru:-users"
+            role="group"
+          >
+            <h4
+              class="mb-2 text-xs font-medium text-muted"
+              id=":Ru:-users"
+            >
+              Users
+            </h4>
+            <ul
+              class="flex flex-wrap gap-2"
+            >
+              <li
+                class="min-w-0 max-w-full"
+              >
+                <button
+                  aria-label="Copy svc_backup"
+                  class="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md border border-outline bg-canvas px-2.5 py-2 text-left hover:border-accent"
+                  type="button"
+                >
+                  <span
+                    class="min-w-0 select-text break-all font-mono text-xs leading-5"
+                  >
+                    svc_backup
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-copy mt-1 shrink-0 text-muted"
+                    fill="none"
+                    height="13"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="13"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      height="14"
+                      rx="2"
+                      ry="2"
+                      width="14"
+                      x="8"
+                      y="8"
+                    />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div
+            aria-labelledby=":Ru:-cve_ids"
+            role="group"
+          >
+            <h4
+              class="mb-2 text-xs font-medium text-muted"
+              id=":Ru:-cve_ids"
+            >
+              CVE IDs
+            </h4>
+            <ul
+              class="flex flex-wrap gap-2"
+            >
+              <li
+                class="min-w-0 max-w-full"
+              >
+                <button
+                  aria-label="Copy CVE-2026-1001"
+                  class="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md border border-outline bg-canvas px-2.5 py-2 text-left hover:border-accent"
+                  type="button"
+                >
+                  <span
+                    class="min-w-0 select-text break-all font-mono text-xs leading-5"
+                  >
+                    CVE-2026-1001
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-copy mt-1 shrink-0 text-muted"
+                    fill="none"
+                    height="13"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="13"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      height="14"
+                      rx="2"
+                      ry="2"
+                      width="14"
+                      x="8"
+                      y="8"
+                    />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div
+            aria-labelledby=":Ru:-resources"
+            role="group"
+          >
+            <h4
+              class="mb-2 text-xs font-medium text-muted"
+              id=":Ru:-resources"
+            >
+              Resources
+            </h4>
+            <ul
+              class="flex flex-wrap gap-2"
+            >
+              <li
+                class="min-w-0 max-w-full"
+              >
+                <button
+                  aria-label="Copy FIN-WS-014"
+                  class="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md border border-outline bg-canvas px-2.5 py-2 text-left hover:border-accent"
+                  type="button"
+                >
+                  <span
+                    class="min-w-0 select-text break-all font-mono text-xs leading-5"
+                  >
+                    FIN-WS-014
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-copy mt-1 shrink-0 text-muted"
+                    fill="none"
+                    height="13"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="13"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      height="14"
+                      rx="2"
+                      ry="2"
+                      width="14"
+                      x="8"
+                      y="8"
+                    />
+                    <path
+                      d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p
+          aria-live="polite"
+          class="mt-2 min-h-5 break-words text-xs leading-5 text-muted"
+          role="status"
+        />
+      </section>
+    </div>
+  </div>
+</section>
+`;

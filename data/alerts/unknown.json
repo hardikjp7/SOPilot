@@ -1,0 +1,18 @@
+{
+  "alert_id": "ALR-NOMATCH",
+  "synthetic": true,
+  "message": "Synthetic temperature sensor warning; no security procedure matches.",
+  "collector": {"label": "training-facilities", "product": "Training Sensor Dashboard 1.0"},
+  "eventType": "environmental.temperature_threshold",
+  "level": "warning",
+  "sensor": {
+    "id": "LAB-ROOM-SENSOR-07",
+    "host": "sensor.example.net",
+    "ip_v6": "2001:db8:30::7",
+    "readings": [{"metric": "temperature_c", "value": "31.8"}, {"metric": "fan_rpm", "value": 0}],
+    "threshold_c": 29.0
+  },
+  "timestamp": "2026-11-18T09:00:00Z",
+  "maintenance": {"work_order": "LAB-WO-022", "assigned_group": "facilities-operators", "state": "awaiting_review"},
+  "context": "Environmental telemetry only. No mail, authentication, encryption, traffic-flood, or object-storage exposure evidence is supplied."
+}

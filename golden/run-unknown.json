@@ -1,0 +1,57 @@
+{
+  "run_id": "RUN-0f60c087e5db",
+  "parsed": {
+    "alert_id": "ALR-NOMATCH",
+    "source": "unknown",
+    "timestamp": "2026-11-18T09:00:00Z",
+    "attack_type": "unknown",
+    "severity": "low",
+    "confidence": 0.99,
+    "summary": "The alert is environmental telemetry about a temperature threshold on a lab sensor and does not contain evidence of phishing, credential abuse, ransomware, DDoS, or public storage exposure. The provided context explicitly states that no relevant security evidence is supplied, so this remains non-security operational data.",
+    "iocs": {
+      "ips": [
+        "2001:db8:30::7"
+      ],
+      "domains": [
+        "sensor.example.net"
+      ],
+      "urls": [],
+      "hashes": [],
+      "emails": [],
+      "users": [],
+      "cve_ids": [],
+      "resources": []
+    },
+    "evidence_fields": [
+      "$.message",
+      "$.collector.label",
+      "$.collector.product",
+      "$.eventType",
+      "$.level",
+      "$.sensor.readings[0].metric",
+      "$.sensor.readings[0].value",
+      "$.sensor.readings[1].metric",
+      "$.sensor.readings[1].value",
+      "$.sensor.threshold_c",
+      "$.context"
+    ],
+    "redacted": false
+  },
+  "checklist": {
+    "alert_id": "ALR-NOMATCH",
+    "status": "no_matching_sop",
+    "playbook_id": null,
+    "retrieval_confidence": 0.2951289894595727,
+    "steps": [],
+    "related_cves": [],
+    "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+    "dropped_count": 0
+  },
+  "timings_ms": {
+    "parse": 1925.4588049999484,
+    "retrieve": 1142.944381999996,
+    "generate": 0.030770999956075684,
+    "verify": 0.03539099998306483,
+    "total": 3068.606661999979
+  }
+}

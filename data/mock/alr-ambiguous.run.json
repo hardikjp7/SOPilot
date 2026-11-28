@@ -1,0 +1,56 @@
+{
+  "run_id": "RUN-MOCK-ALR-AMBIGUOUS",
+  "parsed": {
+    "alert_id": "ALR-AMBIGUOUS",
+    "source": "synthetic-mail",
+    "timestamp": null,
+    "attack_type": "phishing",
+    "severity": "medium",
+    "confidence": 0.55,
+    "summary": "Synthetic ambiguous alert for UI development.",
+    "iocs": {
+      "ips": [],
+      "domains": [],
+      "urls": [],
+      "hashes": [],
+      "emails": [],
+      "users": [],
+      "cve_ids": [],
+      "resources": []
+    },
+    "evidence_fields": [
+      "$.message"
+    ],
+    "redacted": false
+  },
+  "checklist": {
+    "alert_id": "ALR-AMBIGUOUS",
+    "status": "low_confidence",
+    "playbook_id": "PB-PHI",
+    "retrieval_confidence": 0.55,
+    "steps": [
+      {
+        "order": 1,
+        "action": "Review the reported message headers and URL in the mail security console.",
+        "rationale": "The synthetic fixture supplies evidence for this approved playbook step.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-01",
+          "source_text": "PB-PHI-01 | Detect | Review the reported message headers and URL in the mail security console. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "partial"
+      }
+    ],
+    "related_cves": [],
+    "escalation_note": "Request SOC lead review; the available procedure is insufficient.",
+    "dropped_count": 0
+  },
+  "timings_ms": {
+    "parse": 50.0,
+    "retrieve": 50.0,
+    "generate": 100.0,
+    "verify": 100.0,
+    "total": 300.0
+  }
+}

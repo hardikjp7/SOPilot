@@ -1,0 +1,65 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "integer"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "stage": {
+      "enum": [
+        "parse",
+        "retrieve",
+        "generate",
+        "verify",
+        "ticket",
+        "approve"
+      ],
+      "title": "Stage",
+      "type": "string"
+    },
+    "ts": {
+      "title": "Ts",
+      "type": "string"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Model"
+    },
+    "input_hash": {
+      "title": "Input Hash",
+      "type": "string"
+    },
+    "output_hash": {
+      "title": "Output Hash",
+      "type": "string"
+    },
+    "details_json": {
+      "additionalProperties": true,
+      "title": "Details Json",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "run_id",
+    "stage",
+    "ts",
+    "model",
+    "input_hash",
+    "output_hash",
+    "details_json"
+  ],
+  "title": "AuditRow",
+  "type": "object"
+}

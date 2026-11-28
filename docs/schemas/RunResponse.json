@@ -1,0 +1,403 @@
+{
+  "$defs": {
+    "Checklist": {
+      "additionalProperties": false,
+      "properties": {
+        "alert_id": {
+          "title": "Alert Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "grounded",
+            "low_confidence",
+            "no_matching_sop"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "playbook_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Playbook Id"
+        },
+        "retrieval_confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Retrieval Confidence",
+          "type": "number"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/Step"
+          },
+          "title": "Steps",
+          "type": "array"
+        },
+        "related_cves": {
+          "items": {
+            "$ref": "#/$defs/RelatedCVE"
+          },
+          "title": "Related Cves",
+          "type": "array"
+        },
+        "escalation_note": {
+          "title": "Escalation Note",
+          "type": "string"
+        },
+        "dropped_count": {
+          "minimum": 0,
+          "title": "Dropped Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "alert_id",
+        "status",
+        "playbook_id",
+        "retrieval_confidence",
+        "steps",
+        "related_cves",
+        "escalation_note",
+        "dropped_count"
+      ],
+      "title": "Checklist",
+      "type": "object"
+    },
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "playbook_id": {
+          "title": "Playbook Id",
+          "type": "string"
+        },
+        "step_id": {
+          "title": "Step Id",
+          "type": "string"
+        },
+        "source_text": {
+          "title": "Source Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "playbook_id",
+        "step_id",
+        "source_text"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "IOCs": {
+      "additionalProperties": false,
+      "properties": {
+        "ips": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ips",
+          "type": "array"
+        },
+        "domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Domains",
+          "type": "array"
+        },
+        "urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Urls",
+          "type": "array"
+        },
+        "hashes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hashes",
+          "type": "array"
+        },
+        "emails": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Emails",
+          "type": "array"
+        },
+        "users": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Users",
+          "type": "array"
+        },
+        "cve_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cve Ids",
+          "type": "array"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "ips",
+        "domains",
+        "urls",
+        "hashes",
+        "emails",
+        "users",
+        "cve_ids",
+        "resources"
+      ],
+      "title": "IOCs",
+      "type": "object"
+    },
+    "ParsedAlert": {
+      "additionalProperties": false,
+      "properties": {
+        "alert_id": {
+          "title": "Alert Id",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "timestamp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Timestamp"
+        },
+        "attack_type": {
+          "enum": [
+            "phishing",
+            "ransomware",
+            "credential_stuffing",
+            "ddos",
+            "public_s3_bucket",
+            "unknown"
+          ],
+          "title": "Attack Type",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "iocs": {
+          "$ref": "#/$defs/IOCs"
+        },
+        "evidence_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Fields",
+          "type": "array"
+        },
+        "redacted": {
+          "title": "Redacted",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "alert_id",
+        "source",
+        "timestamp",
+        "attack_type",
+        "severity",
+        "confidence",
+        "summary",
+        "iocs",
+        "evidence_fields",
+        "redacted"
+      ],
+      "title": "ParsedAlert",
+      "type": "object"
+    },
+    "RelatedCVE": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "cvss": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cvss"
+        },
+        "remediation": {
+          "title": "Remediation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "severity",
+        "cvss",
+        "remediation"
+      ],
+      "title": "RelatedCVE",
+      "type": "object"
+    },
+    "Step": {
+      "additionalProperties": false,
+      "properties": {
+        "order": {
+          "minimum": 1,
+          "title": "Order",
+          "type": "integer"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "citation": {
+          "$ref": "#/$defs/Citation"
+        },
+        "verified": {
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "support": {
+          "enum": [
+            "supported",
+            "partial"
+          ],
+          "title": "Support",
+          "type": "string"
+        }
+      },
+      "required": [
+        "order",
+        "action",
+        "rationale",
+        "citation",
+        "verified",
+        "support"
+      ],
+      "title": "Step",
+      "type": "object"
+    },
+    "Timings": {
+      "additionalProperties": false,
+      "properties": {
+        "parse": {
+          "minimum": 0,
+          "title": "Parse",
+          "type": "number"
+        },
+        "retrieve": {
+          "minimum": 0,
+          "title": "Retrieve",
+          "type": "number"
+        },
+        "generate": {
+          "minimum": 0,
+          "title": "Generate",
+          "type": "number"
+        },
+        "verify": {
+          "minimum": 0,
+          "title": "Verify",
+          "type": "number"
+        },
+        "total": {
+          "minimum": 0,
+          "title": "Total",
+          "type": "number"
+        }
+      },
+      "required": [
+        "parse",
+        "retrieve",
+        "generate",
+        "verify",
+        "total"
+      ],
+      "title": "Timings",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "parsed": {
+      "$ref": "#/$defs/ParsedAlert"
+    },
+    "checklist": {
+      "$ref": "#/$defs/Checklist"
+    },
+    "timings_ms": {
+      "$ref": "#/$defs/Timings"
+    }
+  },
+  "required": [
+    "run_id",
+    "parsed",
+    "checklist",
+    "timings_ms"
+  ],
+  "title": "RunResponse",
+  "type": "object"
+}

@@ -1,0 +1,151 @@
+{
+  "captured_at": "2026-11-21T15:17:54.769Z",
+  "live_requested": true,
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "theme": "dark",
+  "captures": [
+    {
+      "file": "01-intake.png",
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": null,
+      "bytes": 100182
+    },
+    {
+      "file": "02-parsed-alert.png",
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-382a58c8b5eb",
+      "bytes": 204509
+    },
+    {
+      "file": "03-checklist-grounded.png",
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-382a58c8b5eb",
+      "bytes": 211287
+    },
+    {
+      "file": "04-citation-panel.png",
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-382a58c8b5eb",
+      "bytes": 179914
+    },
+    {
+      "file": "05-low-confidence.png",
+      "sample": "phishing-credential-link",
+      "name": "Phishing email with a clicked link",
+      "mode": "Mock",
+      "status": "low_confidence",
+      "run_id": "RUN-demo-lowconf",
+      "exception": "No real sample produced low_confidence in this capture run.",
+      "bytes": 151512
+    },
+    {
+      "file": "06-no-match.png",
+      "sample": "no-match-usb",
+      "name": "No matching playbook: USB data copy",
+      "mode": "Live",
+      "status": "no_matching_sop",
+      "run_id": "RUN-b626c67b7e5a",
+      "bytes": 113549
+    },
+    {
+      "file": "07-approval.png",
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-382a58c8b5eb",
+      "bytes": 70665
+    },
+    {
+      "file": "08-ticket-approved.png",
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-382a58c8b5eb",
+      "bytes": 79576
+    },
+    {
+      "file": "09-audit.png",
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-382a58c8b5eb",
+      "bytes": 106796
+    }
+  ],
+  "observed_samples": [
+    {
+      "sample": "ALR-RAN",
+      "name": "Ransomware",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-382a58c8b5eb"
+    },
+    {
+      "sample": "no-match-usb",
+      "name": "No matching playbook: USB data copy",
+      "mode": "Live",
+      "status": "no_matching_sop",
+      "run_id": "RUN-b626c67b7e5a"
+    },
+    {
+      "sample": "ALR-PHI",
+      "name": "Phishing",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-fbc73a37bd02"
+    },
+    {
+      "sample": "ALR-CRD",
+      "name": "Credential stuffing",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-599b936175b6"
+    },
+    {
+      "sample": "ALR-S3",
+      "name": "Public S3 bucket",
+      "mode": "Live",
+      "status": "grounded",
+      "run_id": "RUN-093230c3ac3d"
+    },
+    {
+      "sample": "ALR-AMBIGUOUS",
+      "name": "Ambiguous",
+      "mode": "Live",
+      "status": "no_matching_sop",
+      "run_id": "RUN-9ceb4d2a68ae"
+    },
+    {
+      "sample": "ALR-NOMATCH",
+      "name": "No matching playbook",
+      "mode": "Live",
+      "status": "no_matching_sop",
+      "run_id": "RUN-13b083acd214"
+    },
+    {
+      "sample": "phishing-credential-link",
+      "name": "Phishing email with a clicked link",
+      "mode": "Mock",
+      "status": "low_confidence",
+      "run_id": "RUN-demo-lowconf"
+    }
+  ],
+  "browser_issues": []
+}

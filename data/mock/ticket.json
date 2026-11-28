@@ -1,0 +1,72 @@
+{
+  "ticket_id": "INC-20261118-001",
+  "run_id": "RUN-MOCK-ALR-RAN",
+  "title": "Synthetic ransomware incident",
+  "severity": "critical",
+  "status": "draft",
+  "timeline": [
+    {
+      "time": "2026-11-18T09:00:00Z",
+      "event": "Synthetic ransomware alert for UI development."
+    }
+  ],
+  "root_cause": {
+    "hypothesis": "Hypothesis: synthetic ransomware activity may explain the alert.",
+    "confidence": 0.7,
+    "basis": [
+      "Synthetic ransomware alert for UI development."
+    ]
+  },
+  "iocs": {
+    "ips": [
+      "192.0.2.10"
+    ],
+    "domains": [
+      "host.example.com"
+    ],
+    "urls": [],
+    "hashes": [],
+    "emails": [],
+    "users": [],
+    "cve_ids": [],
+    "resources": [
+      "host.example.com"
+    ]
+  },
+  "containment_actions": [
+    {
+      "action": "Confirm encryption activity on the reported host in the EDR console.",
+      "citation": {
+        "playbook_id": "PB-RAN",
+        "step_id": "PB-RAN-01",
+        "source_text": "PB-RAN-01 | Detect | Confirm encryption activity on the reported host in the EDR console. | SOC Tier 2"
+      },
+      "status": "recommended"
+    },
+    {
+      "action": "Isolate the affected host from the network via EDR.",
+      "citation": {
+        "playbook_id": "PB-RAN",
+        "step_id": "PB-RAN-02",
+        "source_text": "PB-RAN-02 | Contain | Isolate the affected host from the network via EDR. | SOC Tier 2"
+      },
+      "status": "recommended"
+    },
+    {
+      "action": "Notify the incident commander with the host and alert evidence.",
+      "citation": {
+        "playbook_id": "PB-RAN",
+        "step_id": "PB-RAN-03",
+        "source_text": "PB-RAN-03 | Escalate | Notify the incident commander with the host and alert evidence. | SOC Tier 2"
+      },
+      "status": "recommended"
+    }
+  ],
+  "affected_assets": [
+    "host.example.com"
+  ],
+  "cves": [],
+  "approved_by": null,
+  "approved_at": null,
+  "audit_ref": "RUN-MOCK-ALR-RAN"
+}

@@ -1,0 +1,2856 @@
+{
+  "generated_at": "2026-11-21T15:25:10.320967+00:00",
+  "comparison": "paired_shared_draft",
+  "support_judge": "production MODEL_FAST verifier (not independent ground truth)",
+  "settings": {
+    "model_main": "genailab-maas-gpt-5.4",
+    "model_fast": "genailab-maas-gpt-5.4-mini",
+    "model_fallback": "azure/genailab-maas-gpt-4.1",
+    "model_embed": "azure/genailab-maas-text-embedding-3-large",
+    "retrieval_top_k": 6,
+    "retrieval_min_score": 0.29,
+    "retrieval_min_margin": 0.03,
+    "hybrid_weight_semantic": 0.7,
+    "min_verified_steps": 3
+  },
+  "metrics": {
+    "without_verifier": {
+      "cases_total": 12,
+      "cases_completed": 12,
+      "cases_failed": 0,
+      "playbook_match_accuracy": 0.8333333333333334,
+      "citation_validity_rate": 1.0,
+      "valid_citations": 32,
+      "steps": 32,
+      "unsupported_step_rate": 0.0,
+      "unsupported_steps": 0,
+      "correct_fallback_rate": 1.0,
+      "expected_fallback_cases": 4,
+      "latency_p50_ms": 5234.298257000319,
+      "latency_p95_ms": 11230.535983049867
+    },
+    "with_verifier": {
+      "cases_total": 12,
+      "cases_completed": 12,
+      "cases_failed": 0,
+      "playbook_match_accuracy": 0.8333333333333334,
+      "citation_validity_rate": 1.0,
+      "valid_citations": 32,
+      "steps": 32,
+      "unsupported_step_rate": 0.0,
+      "unsupported_steps": 0,
+      "correct_fallback_rate": 1.0,
+      "expected_fallback_cases": 4,
+      "latency_p50_ms": 6069.3990285003565,
+      "latency_p95_ms": 12933.221783900171
+    }
+  },
+  "results": [
+    {
+      "case_id": "CASE-clean-phishing",
+      "category": "clean",
+      "expected_playbook": "PB-PHI",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-CLEAN-PHISHING",
+        "source": "synthetic-mail",
+        "timestamp": "2026-11-18T09:00:00Z",
+        "attack_type": "phishing",
+        "severity": "high",
+        "confidence": 0.98,
+        "summary": "The message shows classic phishing indicators: sender/reply-to mismatch, failed SPF/DMARC, a deceptive display name/subject, and a link whose visible destination differs from the actual login URL with redirects. The user report says the sign-in page address changed and they clicked but did not enter information, so this appears to be a credible lure without confirmed credential compromise.",
+        "iocs": {
+          "ips": [
+            "203.0.113.42"
+          ],
+          "domains": [
+            "example.com",
+            "example.net",
+            "example.org",
+            "mail.example.org",
+            "relay.example.net",
+            "documents.example.org",
+            "review.example.net"
+          ],
+          "urls": [
+            "https://example.com/login",
+            "https://documents.example.org/review",
+            "https://review.example.net/session"
+          ],
+          "hashes": [],
+          "emails": [
+            "sender@example.com",
+            "review-desk@example.net",
+            "analyst@example.org",
+            "synthetic-msg-0042@example.com"
+          ],
+          "users": [],
+          "cve_ids": [
+            "CVE-2099-900002"
+          ],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.message.from",
+          "$.message.replyTo",
+          "$.message.display_name",
+          "$.message.subject",
+          "$.message.url",
+          "$.message.headers[\"Authentication-Results\"]",
+          "$.message.links[0].display",
+          "$.message.links[0].href",
+          "$.message.links[0].redirects[0]",
+          "$.userReport.comment",
+          "$.userReport.clicked"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-PHI-01",
+        "PB-PHI-02",
+        "PB-PHI-03",
+        "PB-PHI-05",
+        "PB-PHI-06",
+        "PB-PHI-09"
+      ],
+      "retrieval_confidence": 0.39422746177552326,
+      "retrieval_margin": 0.10082665431834625,
+      "verdicts": [
+        {
+          "order": 1,
+          "support": "supported",
+          "reason": "Matches the cited detect step exactly: review the reported message headers and URL in the mail security console."
+        },
+        {
+          "order": 2,
+          "support": "supported",
+          "reason": "Matches the cited contain step exactly: quarantine the reported message using the mail security console."
+        },
+        {
+          "order": 3,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly: review sign-in logs for the reported account for suspicious activity."
+        },
+        {
+          "order": 4,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly: search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients."
+        },
+        {
+          "order": 5,
+          "support": "supported",
+          "reason": "Matches the cited contain step, including the required condition after analyst confirmation and the need for expiry and rollback owner."
+        },
+        {
+          "order": 6,
+          "support": "supported",
+          "reason": "Matches the cited recover step exactly: confirm affected users can sign in safely and monitor for repeated suspicious activity."
+        }
+      ],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:23:48.281160+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 1198,
+          "output_tokens": 175,
+          "latency_ms": 2043.054,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:23:49.014303+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 82,
+          "output_tokens": 0,
+          "latency_ms": 647.786,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:23:50.273570+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1724,
+          "output_tokens": 26,
+          "latency_ms": 1233.031,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:23:57.597338+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1870,
+          "output_tokens": 930,
+          "latency_ms": 8557.803,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:23:59.368033+00:00",
+          "stage": "verify",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 1154,
+          "output_tokens": 207,
+          "latency_ms": 1736.358,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "low_confidence",
+        "playbook_id": "PB-PHI",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 11417.954505000125,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-PHISHING",
+          "status": "low_confidence",
+          "playbook_id": "PB-PHI",
+          "retrieval_confidence": 0.39422746177552326,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Review the reported message headers and URL in the mail security console. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported by the alert summary and evidence fields showing header authentication failures, sender/reply-to mismatch, and mismatched link/redirect indicators in the reported message.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-01",
+                "source_text": "PB-PHI-01 | Detect | Review the reported message headers and URL in the mail security console. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 2,
+              "action": "Quarantine the reported message using the mail security console. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported because the alert is high-confidence phishing and identifies a specific reported message with malicious-link indicators.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-02",
+                "source_text": "PB-PHI-02 | Contain | Quarantine the reported message using the mail security console. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 3,
+              "action": "Review sign-in logs for the reported account for suspicious activity. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported by the user report that the link was clicked and the sign-in page changed, so account sign-in activity should be checked even though no credential entry is confirmed.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-03",
+                "source_text": "PB-PHI-03 | Investigate | Review sign-in logs for the reported account for suspicious activity. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 4,
+              "action": "Search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported by the confirmed phishing indicators and the presence of sender and URL artifacts that can be used to identify additional affected recipients.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-05",
+                "source_text": "PB-PHI-05 | Investigate | Search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients. | Mail Security Analyst"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 5,
+              "action": "After analyst confirmation, block the malicious sender and URL in the mail security controls with an expiry and rollback owner. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported after analyst confirmation because the alert provides strong phishing evidence including authentication failures and deceptive URL behavior.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-06",
+                "source_text": "PB-PHI-06 | Contain | After analyst confirmation, block the malicious sender and URL in the mail security controls with an expiry and rollback owner. | Mail Security Administrator"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 6,
+              "action": "Confirm that affected users can sign in safely and monitor their accounts for repeated suspicious activity. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported because a user clicked the phishing link, so safe sign-in confirmation and continued monitoring are relevant for any identified affected users.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-09",
+                "source_text": "PB-PHI-09 | Recover | Confirm that affected users can sign in safely and monitor their accounts for repeated suspicious activity. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900002",
+              "severity": "medium",
+              "cvss": 6.1,
+              "remediation": "Enable final-destination inspection in the lab build and rescan affected synthetic messages."
+            }
+          ],
+          "escalation_note": "Generated draft requires support verification and analyst review before use.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "grounded",
+        "playbook_id": "PB-PHI",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 13188.522545000524,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-PHISHING",
+          "status": "grounded",
+          "playbook_id": "PB-PHI",
+          "retrieval_confidence": 0.39422746177552326,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Review the reported message headers and URL in the mail security console. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported by the alert summary and evidence fields showing header authentication failures, sender/reply-to mismatch, and mismatched link/redirect indicators in the reported message.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-01",
+                "source_text": "PB-PHI-01 | Detect | Review the reported message headers and URL in the mail security console. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 2,
+              "action": "Quarantine the reported message using the mail security console. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported because the alert is high-confidence phishing and identifies a specific reported message with malicious-link indicators.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-02",
+                "source_text": "PB-PHI-02 | Contain | Quarantine the reported message using the mail security console. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 3,
+              "action": "Review sign-in logs for the reported account for suspicious activity. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported by the user report that the link was clicked and the sign-in page changed, so account sign-in activity should be checked even though no credential entry is confirmed.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-03",
+                "source_text": "PB-PHI-03 | Investigate | Review sign-in logs for the reported account for suspicious activity. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 4,
+              "action": "Search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported by the confirmed phishing indicators and the presence of sender and URL artifacts that can be used to identify additional affected recipients.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-05",
+                "source_text": "PB-PHI-05 | Investigate | Search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients. | Mail Security Analyst"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 5,
+              "action": "After analyst confirmation, block the malicious sender and URL in the mail security controls with an expiry and rollback owner. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported after analyst confirmation because the alert provides strong phishing evidence including authentication failures and deceptive URL behavior.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-06",
+                "source_text": "PB-PHI-06 | Contain | After analyst confirmation, block the malicious sender and URL in the mail security controls with an expiry and rollback owner. | Mail Security Administrator"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 6,
+              "action": "Confirm that affected users can sign in safely and monitor their accounts for repeated suspicious activity. Context from alert: {\"ips\": [\"203.0.113.42\"], \"domains\": [\"example.com\", \"example.net\", \"example.org\", \"mail.example.org\", \"relay.example.net\", \"documents.example.org\", \"review.example.net\"], \"emails\": [\"sender@example.com\", \"review-desk@example.net\", \"analyst@example.org\", \"synthetic-msg-0042@example.com\"]}",
+              "rationale": "Supported because a user clicked the phishing link, so safe sign-in confirmation and continued monitoring are relevant for any identified affected users.",
+              "citation": {
+                "playbook_id": "PB-PHI",
+                "step_id": "PB-PHI-09",
+                "source_text": "PB-PHI-09 | Recover | Confirm that affected users can sign in safely and monitor their accounts for repeated suspicious activity. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900002",
+              "severity": "medium",
+              "cvss": 6.1,
+              "remediation": "Enable final-destination inspection in the lab build and rescan affected synthetic messages."
+            }
+          ],
+          "escalation_note": "",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-clean-ransomware",
+      "category": "clean",
+      "expected_playbook": "PB-RAN",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-CLEAN-RANSOMWARE",
+        "source": "synthetic-edr",
+        "timestamp": "2026-11-18T09:00:00Z",
+        "attack_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "summary": "The alert shows a rapid burst of 418 file renames to a new suffix within 45 seconds on a lab endpoint, along with an attempted deletion of recovery copies that was blocked. This is strongly consistent with ransomware-like activity, although the telemetry is synthetic and share impact has not been established.",
+        "iocs": {
+          "ips": [
+            "192.0.2.10",
+            "2001:db8:10::10"
+          ],
+          "domains": [
+            "host.example.com"
+          ],
+          "urls": [],
+          "hashes": [
+            "1111111111111111111111111111111111111111111111111111111111111111"
+          ],
+          "emails": [],
+          "users": [
+            "synthetic-user"
+          ],
+          "cve_ids": [
+            "CVE-2099-900004"
+          ],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.events[0]",
+          "$.events[0].kind",
+          "$.events[0].count",
+          "$.events[0].new_suffix",
+          "$.events[0].window_seconds",
+          "$.events[1]",
+          "$.events[1].kind",
+          "$.events[1].outcome",
+          "$.recovery",
+          "$.recovery.finding_refs[0]",
+          "$.notes[0]",
+          "$.notes[1]"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-RAN-01",
+        "PB-RAN-04",
+        "PB-RAN-05",
+        "PB-RAN-06",
+        "PB-RAN-08",
+        "PB-RAN-10"
+      ],
+      "retrieval_confidence": 0.38595360596144834,
+      "retrieval_margin": 0.21067021155911653,
+      "verdicts": [
+        {
+          "order": 1,
+          "support": "supported",
+          "reason": "Matches the cited detect action exactly: confirm encryption activity on the reported host in the EDR console."
+        },
+        {
+          "order": 2,
+          "support": "supported",
+          "reason": "Matches the cited investigate action exactly, including preserving telemetry, file-change events, recovery-copy alerts, and timestamps without executing suspect files."
+        },
+        {
+          "order": 3,
+          "support": "supported",
+          "reason": "Matches the cited investigate action exactly: identify affected shares and peer hosts from existing endpoint and file-access logs to establish scope."
+        },
+        {
+          "order": 4,
+          "support": "supported",
+          "reason": "Matches the cited contain action exactly, including the incident commander's approval and documenting dependencies and rollback steps."
+        },
+        {
+          "order": 5,
+          "support": "supported",
+          "reason": "Matches the cited eradicate action exactly, including evidence preservation and incident commander approval before rebuilding affected endpoints."
+        },
+        {
+          "order": 6,
+          "support": "supported",
+          "reason": "Matches the cited recover action exactly: reconnect only after endpoint checks pass and monitor for renewed encryption or unauthorized access."
+        }
+      ],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:01.344127+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 1285,
+          "output_tokens": 175,
+          "latency_ms": 1974.305,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:02.618002+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 70,
+          "output_tokens": 0,
+          "latency_ms": 1248.272,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:04.099497+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1475,
+          "output_tokens": 26,
+          "latency_ms": 1475.613,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:10.445226+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1625,
+          "output_tokens": 750,
+          "latency_ms": 7822.047,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:12.092555+00:00",
+          "stage": "verify",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 945,
+          "output_tokens": 213,
+          "latency_ms": 1624.464,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "low_confidence",
+        "playbook_id": "PB-RAN",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 11077.193555999656,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-RANSOMWARE",
+          "status": "low_confidence",
+          "playbook_id": "PB-RAN",
+          "retrieval_confidence": 0.38595360596144834,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm encryption activity on the reported host in the EDR console. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Alert summary reports a rapid burst of 418 file renames to a new suffix within 45 seconds, which supports first confirming encryption activity on the reported host.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-01",
+                "source_text": "PB-RAN-01 | Detect | Confirm encryption activity on the reported host in the EDR console. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 2,
+              "action": "Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Evidence fields explicitly reference file-change activity, a blocked recovery-related event, and timestamps, supporting preservation of telemetry and alerts without executing suspect files.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-04",
+                "source_text": "PB-RAN-04 | Investigate | Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. | Endpoint Analyst"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 3,
+              "action": "Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The summary states ransomware-like activity is strongly indicated but share impact has not been established, so scoping affected shares and peer hosts is supported.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-05",
+                "source_text": "PB-RAN-05 | Investigate | Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 4,
+              "action": "With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert is critical with high confidence and indicates likely ransomware behavior; containment focused on affected service accounts and share access is supported while preserving the required approval and documentation conditions.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-06",
+                "source_text": "PB-RAN-06 | Contain | With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. | Identity Administrator"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 5,
+              "action": "Rebuild confirmed affected endpoints from a trusted baseline after evidence preservation and incident commander approval. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert supports ransomware-like activity, and this eradication step is applicable only for confirmed affected endpoints while preserving the evidence-preservation and approval conditions in the playbook.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-08",
+                "source_text": "PB-RAN-08 | Eradicate | Rebuild confirmed affected endpoints from a trusted baseline after evidence preservation and incident commander approval. | Endpoint Administrator"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 6,
+              "action": "Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "A blocked attempt involving recovery copies and ransomware-like behavior supports including the recovery step for any later reconnection of recovered systems, with the playbook's endpoint-check and monitoring conditions preserved.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-10",
+                "source_text": "PB-RAN-10 | Recover | Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. | Incident Commander"
+              },
+              "verified": false,
+              "support": "partial"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900004",
+              "severity": "critical",
+              "cvss": 9.1,
+              "remediation": "Apply the lab role-boundary fix, protect known-good recovery points, and test restore integrity before reconnecting recovered systems."
+            }
+          ],
+          "escalation_note": "Generated draft requires support verification and analyst review before use.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "grounded",
+        "playbook_id": "PB-RAN",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 12724.339342999883,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-RANSOMWARE",
+          "status": "grounded",
+          "playbook_id": "PB-RAN",
+          "retrieval_confidence": 0.38595360596144834,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm encryption activity on the reported host in the EDR console. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Alert summary reports a rapid burst of 418 file renames to a new suffix within 45 seconds, which supports first confirming encryption activity on the reported host.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-01",
+                "source_text": "PB-RAN-01 | Detect | Confirm encryption activity on the reported host in the EDR console. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 2,
+              "action": "Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Evidence fields explicitly reference file-change activity, a blocked recovery-related event, and timestamps, supporting preservation of telemetry and alerts without executing suspect files.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-04",
+                "source_text": "PB-RAN-04 | Investigate | Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. | Endpoint Analyst"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 3,
+              "action": "Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The summary states ransomware-like activity is strongly indicated but share impact has not been established, so scoping affected shares and peer hosts is supported.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-05",
+                "source_text": "PB-RAN-05 | Investigate | Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 4,
+              "action": "With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert is critical with high confidence and indicates likely ransomware behavior; containment focused on affected service accounts and share access is supported while preserving the required approval and documentation conditions.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-06",
+                "source_text": "PB-RAN-06 | Contain | With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. | Identity Administrator"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 5,
+              "action": "Rebuild confirmed affected endpoints from a trusted baseline after evidence preservation and incident commander approval. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert supports ransomware-like activity, and this eradication step is applicable only for confirmed affected endpoints while preserving the evidence-preservation and approval conditions in the playbook.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-08",
+                "source_text": "PB-RAN-08 | Eradicate | Rebuild confirmed affected endpoints from a trusted baseline after evidence preservation and incident commander approval. | Endpoint Administrator"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 6,
+              "action": "Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "A blocked attempt involving recovery copies and ransomware-like behavior supports including the recovery step for any later reconnection of recovered systems, with the playbook's endpoint-check and monitoring conditions preserved.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-10",
+                "source_text": "PB-RAN-10 | Recover | Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. | Incident Commander"
+              },
+              "verified": true,
+              "support": "supported"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900004",
+              "severity": "critical",
+              "cvss": 9.1,
+              "remediation": "Apply the lab role-boundary fix, protect known-good recovery points, and test restore integrity before reconnecting recovered systems."
+            }
+          ],
+          "escalation_note": "",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-clean-credential_stuffing",
+      "category": "clean",
+      "expected_playbook": "PB-CRD",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-CLEAN-CREDENTIAL_STUFFING",
+        "source": "synthetic-auth",
+        "timestamp": "2026-11-18T09:00:00Z",
+        "attack_type": "credential_stuffing",
+        "severity": "high",
+        "confidence": 0.99,
+        "summary": "The alert shows a high-volume burst of failed logins from multiple source IPs against 126 accounts in a 5-minute window, which is consistent with credential stuffing. There are 2 successful events, but the data is synthetic and the alert note says successful events still require account-owner review, so confirmed compromise is not established.",
+        "iocs": {
+          "ips": [
+            "198.51.100.23",
+            "192.0.2.80",
+            "203.0.113.18",
+            "2001:db8:20::23"
+          ],
+          "domains": [
+            "signin.example.org"
+          ],
+          "urls": [
+            "https://signin.example.org/session"
+          ],
+          "hashes": [],
+          "emails": [],
+          "users": [
+            "synthetic-user",
+            "lab-user-002"
+          ],
+          "cve_ids": [
+            "CVE-2099-900007"
+          ],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.network.src_ip",
+          "$.network.forwardedFor",
+          "$.network.observed_sources",
+          "$.window.from",
+          "$.window.to",
+          "$.window.seconds",
+          "$.username",
+          "$.failedLogins",
+          "$.aggregates.accounts_seen",
+          "$.aggregates.success_count",
+          "$.aggregates.distinct_client_fingerprints",
+          "$.sampleEvents[0].result",
+          "$.sampleEvents[1].result",
+          "$.analyst_note"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-CRD-01",
+        "PB-CRD-03",
+        "PB-CRD-07",
+        "PB-CRD-08",
+        "PB-CRD-09",
+        "PB-CRD-10"
+      ],
+      "retrieval_confidence": 0.4373380153549885,
+      "retrieval_margin": 0.11407376522799506,
+      "verdicts": [
+        {
+          "order": 1,
+          "support": "supported",
+          "reason": "The step exactly matches the cited detect action to confirm the failed login burst in authentication logs."
+        },
+        {
+          "order": 2,
+          "support": "supported",
+          "reason": "The step exactly matches the cited investigate action to review successful sign-ins associated with the alert."
+        },
+        {
+          "order": 3,
+          "support": "supported",
+          "reason": "The step exactly matches the cited escalate action to provide the SOC lead with attempted accounts, confirmed compromises, control changes, and unresolved access concerns."
+        }
+      ],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:13.905344+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 1274,
+          "output_tokens": 180,
+          "latency_ms": 1810.967,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:15.275608+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 74,
+          "output_tokens": 0,
+          "latency_ms": 1333.596,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:16.501903+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1627,
+          "output_tokens": 26,
+          "latency_ms": 1220.558,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:20.651616+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1778,
+          "output_tokens": 443,
+          "latency_ms": 5370.839,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:22.164125+00:00",
+          "stage": "verify",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 645,
+          "output_tokens": 113,
+          "latency_ms": 1489.646,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "low_confidence",
+        "playbook_id": "PB-CRD",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 3,
+        "valid_citations": 3,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 8559.053519999907,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-CREDENTIAL_STUFFING",
+          "status": "low_confidence",
+          "playbook_id": "PB-CRD",
+          "retrieval_confidence": 0.4373380153549885,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm the failed login burst in authentication logs. Context from alert: {\"ips\": [\"198.51.100.23\", \"192.0.2.80\", \"203.0.113.18\", \"2001:db8:20::23\"], \"domains\": [\"signin.example.org\"], \"users\": [\"synthetic-user\", \"lab-user-002\"]}",
+              "rationale": "Alert summary states a high-volume burst of failed logins against 126 accounts in a 5-minute window, consistent with credential stuffing, and the provided evidence fields include authentication results and aggregate failed login data.",
+              "citation": {
+                "playbook_id": "PB-CRD",
+                "step_id": "PB-CRD-01",
+                "source_text": "PB-CRD-01 | Detect | Confirm the failed login burst in authentication logs. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 2,
+              "action": "Review successful sign-ins associated with the alert. Context from alert: {\"ips\": [\"198.51.100.23\", \"192.0.2.80\", \"203.0.113.18\", \"2001:db8:20::23\"], \"domains\": [\"signin.example.org\"], \"users\": [\"synthetic-user\", \"lab-user-002\"]}",
+              "rationale": "The alert reports 2 successful events, but also notes confirmed compromise is not established, so the successful sign-ins should be reviewed.",
+              "citation": {
+                "playbook_id": "PB-CRD",
+                "step_id": "PB-CRD-03",
+                "source_text": "PB-CRD-03 | Investigate | Review successful sign-ins associated with the alert. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 3,
+              "action": "Provide the SOC lead with attempted accounts, confirmed compromises, control changes, and unresolved access concerns. Context from alert: {\"ips\": [\"198.51.100.23\", \"192.0.2.80\", \"203.0.113.18\", \"2001:db8:20::23\"], \"domains\": [\"signin.example.org\"], \"users\": [\"synthetic-user\", \"lab-user-002\"]}",
+              "rationale": "The alert is high severity with broad account targeting and unresolved status regarding the 2 successful events, supporting escalation with attempted accounts and any confirmed findings.",
+              "citation": {
+                "playbook_id": "PB-CRD",
+                "step_id": "PB-CRD-10",
+                "source_text": "PB-CRD-10 | Escalate | Provide the SOC lead with attempted accounts, confirmed compromises, control changes, and unresolved access concerns. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900007",
+              "severity": "high",
+              "cvss": 7.3,
+              "remediation": "Deploy the exercise shared-counter update and validate rate limits across all lab ingress nodes using non-secret test inputs."
+            }
+          ],
+          "escalation_note": "Generated draft requires support verification and analyst review before use.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "grounded",
+        "playbook_id": "PB-CRD",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 3,
+        "valid_citations": 3,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 10071.405394999601,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-CREDENTIAL_STUFFING",
+          "status": "grounded",
+          "playbook_id": "PB-CRD",
+          "retrieval_confidence": 0.4373380153549885,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm the failed login burst in authentication logs. Context from alert: {\"ips\": [\"198.51.100.23\", \"192.0.2.80\", \"203.0.113.18\", \"2001:db8:20::23\"], \"domains\": [\"signin.example.org\"], \"users\": [\"synthetic-user\", \"lab-user-002\"]}",
+              "rationale": "Alert summary states a high-volume burst of failed logins against 126 accounts in a 5-minute window, consistent with credential stuffing, and the provided evidence fields include authentication results and aggregate failed login data.",
+              "citation": {
+                "playbook_id": "PB-CRD",
+                "step_id": "PB-CRD-01",
+                "source_text": "PB-CRD-01 | Detect | Confirm the failed login burst in authentication logs. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 2,
+              "action": "Review successful sign-ins associated with the alert. Context from alert: {\"ips\": [\"198.51.100.23\", \"192.0.2.80\", \"203.0.113.18\", \"2001:db8:20::23\"], \"domains\": [\"signin.example.org\"], \"users\": [\"synthetic-user\", \"lab-user-002\"]}",
+              "rationale": "The alert reports 2 successful events, but also notes confirmed compromise is not established, so the successful sign-ins should be reviewed.",
+              "citation": {
+                "playbook_id": "PB-CRD",
+                "step_id": "PB-CRD-03",
+                "source_text": "PB-CRD-03 | Investigate | Review successful sign-ins associated with the alert. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 3,
+              "action": "Provide the SOC lead with attempted accounts, confirmed compromises, control changes, and unresolved access concerns. Context from alert: {\"ips\": [\"198.51.100.23\", \"192.0.2.80\", \"203.0.113.18\", \"2001:db8:20::23\"], \"domains\": [\"signin.example.org\"], \"users\": [\"synthetic-user\", \"lab-user-002\"]}",
+              "rationale": "The alert is high severity with broad account targeting and unresolved status regarding the 2 successful events, supporting escalation with attempted accounts and any confirmed findings.",
+              "citation": {
+                "playbook_id": "PB-CRD",
+                "step_id": "PB-CRD-10",
+                "source_text": "PB-CRD-10 | Escalate | Provide the SOC lead with attempted accounts, confirmed compromises, control changes, and unresolved access concerns. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900007",
+              "severity": "high",
+              "cvss": 7.3,
+              "remediation": "Deploy the exercise shared-counter update and validate rate limits across all lab ingress nodes using non-secret test inputs."
+            }
+          ],
+          "escalation_note": "",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-clean-public_s3_bucket",
+      "category": "clean",
+      "expected_playbook": "PB-S3",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-CLEAN-PUBLIC_S3_BUCKET",
+        "source": "synthetic-cloud",
+        "timestamp": "2026-11-18T09:00:00Z",
+        "attack_type": "public_s3_bucket",
+        "severity": "high",
+        "confidence": 0.98,
+        "summary": "The bucket s3://sopilot-example-bucket is reported public, with a policy allowing s3:GetObject to principal \"*\" and a 200 OK anonymous GET to training/demo-records.json. Audit coverage is incomplete and the note says the sample does not establish the full exposure scope, but the observed public read is sufficient to classify unintended public object access.",
+        "iocs": {
+          "ips": [
+            "203.0.113.72"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": [],
+          "emails": [],
+          "users": [
+            "lab-deployment-role"
+          ],
+          "cve_ids": [
+            "CVE-2099-900011"
+          ],
+          "resources": [
+            "s3://sopilot-example-bucket",
+            "sopilot-example-bucket"
+          ]
+        },
+        "evidence_fields": [
+          "$.finding.public",
+          "$.finding.public_access_block.blockPublicPolicy",
+          "$.finding.public_access_block.restrict_public_buckets",
+          "$.finding.policy_excerpt.effect",
+          "$.finding.policy_excerpt.principal",
+          "$.finding.policy_excerpt.actions[0]",
+          "$.accessLogSample[0].requester",
+          "$.accessLogSample[0].operation",
+          "$.accessLogSample[0].status",
+          "$.accessLogSample[0].object_key",
+          "$.resourceDetails.intended_access",
+          "$.auditCoverage.complete",
+          "$.auditCoverage.missing_window_minutes",
+          "$.note"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-S3-01",
+        "PB-S3-02",
+        "PB-S3-03",
+        "PB-S3-04",
+        "PB-S3-05",
+        "PB-S3-07"
+      ],
+      "retrieval_confidence": 0.4384713732427858,
+      "retrieval_margin": 0.2752808206374018,
+      "verdicts": [
+        {
+          "order": 1,
+          "support": "supported",
+          "reason": "Matches the cited detect step exactly."
+        },
+        {
+          "order": 2,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly, including preserving those settings before further changes."
+        },
+        {
+          "order": 3,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly, including not downloading exposed object contents."
+        },
+        {
+          "order": 4,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly."
+        },
+        {
+          "order": 5,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly."
+        },
+        {
+          "order": 6,
+          "support": "supported",
+          "reason": "Matches the cited contain step exactly, including the owner-confirmation condition."
+        }
+      ],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:24.224700+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 1196,
+          "output_tokens": 215,
+          "latency_ms": 2059.004,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:25.415157+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 82,
+          "output_tokens": 0,
+          "latency_ms": 1164.273,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:26.327840+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1487,
+          "output_tokens": 26,
+          "latency_ms": 907.348,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:32.795633+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1638,
+          "output_tokens": 754,
+          "latency_ms": 7375.725,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:34.496914+00:00",
+          "stage": "verify",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 931,
+          "output_tokens": 146,
+          "latency_ms": 1678.293,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "low_confidence",
+        "playbook_id": "PB-S3",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 10631.574824000381,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-PUBLIC_S3_BUCKET",
+          "status": "low_confidence",
+          "playbook_id": "PB-S3",
+          "retrieval_confidence": 0.4384713732427858,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm public access on the reported bucket in the cloud console. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "Alert summary states the bucket is reported public, includes a policy allowing s3:GetObject to principal \"*\", and shows a 200 OK anonymous GET, so confirmation of public access is directly supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-01",
+                "source_text": "PB-S3-01 | Detect | Confirm public access on the reported bucket in the cloud console. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 2,
+              "action": "Preserve the bucket policy, access-control configuration, public-access settings, and recent change events before further changes. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The alert includes policy, public-access-block, and access-log evidence and indicates incomplete audit coverage, so preserving current configuration and recent change evidence before modifications is supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-04",
+                "source_text": "PB-S3-04 | Investigate | Preserve the bucket policy, access-control configuration, public-access settings, and recent change events before further changes. | Cloud Security Analyst"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 3,
+              "action": "Confirm the bucket owner, intended audience, and data classification without downloading exposed object contents. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The evidence references intended access and the note says the sample does not establish full exposure scope, so confirming ownership, intended audience, and classification without downloading contents is supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-05",
+                "source_text": "PB-S3-05 | Investigate | Confirm the bucket owner, intended audience, and data classification without downloading exposed object contents. | Data Owner"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 4,
+              "action": "Review the bucket access logs for unexpected downloads. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The alert provides an anonymous GET sample with 200 OK to a named object, which supports reviewing access logs for unexpected downloads.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-03",
+                "source_text": "PB-S3-03 | Investigate | Review the bucket access logs for unexpected downloads. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 5,
+              "action": "Establish the exposure window and distinguish confirmed object access from missing or incomplete access logs. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The alert explicitly says audit coverage is incomplete and does not establish the full exposure scope, so establishing the exposure window and separating confirmed access from logging gaps is directly supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-07",
+                "source_text": "PB-S3-07 | Investigate | Establish the exposure window and distinguish confirmed object access from missing or incomplete access logs. | Cloud Security Analyst"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 6,
+              "action": "Enable Block Public Access on the reported bucket after owner confirmation. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The bucket is reported public with observed anonymous read access, and this containment step is explicitly conditioned on owner confirmation in the playbook chunk.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-02",
+                "source_text": "PB-S3-02 | Contain | Enable Block Public Access on the reported bucket after owner confirmation. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900011",
+              "severity": "high",
+              "cvss": 8.2,
+              "remediation": "Correct the exercise deployment template, remove the unintended public grant through change control, and verify that redeployment keeps access private."
+            }
+          ],
+          "escalation_note": "Generated draft requires support verification and analyst review before use.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "grounded",
+        "playbook_id": "PB-S3",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 12332.676701999844,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-PUBLIC_S3_BUCKET",
+          "status": "grounded",
+          "playbook_id": "PB-S3",
+          "retrieval_confidence": 0.4384713732427858,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm public access on the reported bucket in the cloud console. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "Alert summary states the bucket is reported public, includes a policy allowing s3:GetObject to principal \"*\", and shows a 200 OK anonymous GET, so confirmation of public access is directly supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-01",
+                "source_text": "PB-S3-01 | Detect | Confirm public access on the reported bucket in the cloud console. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 2,
+              "action": "Preserve the bucket policy, access-control configuration, public-access settings, and recent change events before further changes. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The alert includes policy, public-access-block, and access-log evidence and indicates incomplete audit coverage, so preserving current configuration and recent change evidence before modifications is supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-04",
+                "source_text": "PB-S3-04 | Investigate | Preserve the bucket policy, access-control configuration, public-access settings, and recent change events before further changes. | Cloud Security Analyst"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 3,
+              "action": "Confirm the bucket owner, intended audience, and data classification without downloading exposed object contents. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The evidence references intended access and the note says the sample does not establish full exposure scope, so confirming ownership, intended audience, and classification without downloading contents is supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-05",
+                "source_text": "PB-S3-05 | Investigate | Confirm the bucket owner, intended audience, and data classification without downloading exposed object contents. | Data Owner"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 4,
+              "action": "Review the bucket access logs for unexpected downloads. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The alert provides an anonymous GET sample with 200 OK to a named object, which supports reviewing access logs for unexpected downloads.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-03",
+                "source_text": "PB-S3-03 | Investigate | Review the bucket access logs for unexpected downloads. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 5,
+              "action": "Establish the exposure window and distinguish confirmed object access from missing or incomplete access logs. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The alert explicitly says audit coverage is incomplete and does not establish the full exposure scope, so establishing the exposure window and separating confirmed access from logging gaps is directly supported.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-07",
+                "source_text": "PB-S3-07 | Investigate | Establish the exposure window and distinguish confirmed object access from missing or incomplete access logs. | Cloud Security Analyst"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 6,
+              "action": "Enable Block Public Access on the reported bucket after owner confirmation. Context from alert: {\"ips\": [\"203.0.113.72\"], \"users\": [\"lab-deployment-role\"], \"resources\": [\"s3://sopilot-example-bucket\", \"sopilot-example-bucket\"]}",
+              "rationale": "The bucket is reported public with observed anonymous read access, and this containment step is explicitly conditioned on owner confirmation in the playbook chunk.",
+              "citation": {
+                "playbook_id": "PB-S3",
+                "step_id": "PB-S3-02",
+                "source_text": "PB-S3-02 | Contain | Enable Block Public Access on the reported bucket after owner confirmation. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900011",
+              "severity": "high",
+              "cvss": 8.2,
+              "remediation": "Correct the exercise deployment template, remove the unintended public grant through change control, and verify that redeployment keeps access private."
+            }
+          ],
+          "escalation_note": "",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-clean-ddos",
+      "category": "clean",
+      "expected_playbook": "PB-DOS",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-CLEAN-DDOS",
+        "source": "synthetic-edge",
+        "timestamp": "2026-11-18T09:00:00Z",
+        "attack_type": "ddos",
+        "severity": "high",
+        "confidence": 0.99,
+        "summary": "Observed HTTP request volume is far above baseline and coincides with 81% 503 responses and a saturated edge connection queue, indicating a distributed availability-impacting flood. The alert states no load test or release is scheduled, but the exact source and motive remain unconfirmed.",
+        "iocs": {
+          "ips": [
+            "198.51.100.40",
+            "203.0.113.41",
+            "2001:db8:40::1"
+          ],
+          "domains": [
+            "portal.example.org"
+          ],
+          "urls": [
+            "https://portal.example.org/"
+          ],
+          "hashes": [],
+          "emails": [],
+          "users": [],
+          "cve_ids": [],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.signals.request_rate_per_second",
+          "$.signals.baseline_rps",
+          "$.signals.http_503_percent",
+          "$.signals.edge_connection_queue",
+          "$.signals.source_addresses",
+          "$.message"
+        ],
+        "redacted": false
+      },
+      "retrieved_chunk_ids": [
+        "PB-DOS-01",
+        "PB-DOS-02",
+        "PB-DOS-04",
+        "PB-DOS-05",
+        "PB-DOS-09",
+        "PB-DOS-10"
+      ],
+      "retrieval_confidence": 0.33759903125344387,
+      "retrieval_margin": 0.1469728063305158,
+      "verdicts": [
+        {
+          "order": 1,
+          "support": "supported",
+          "reason": "Matches the cited Detect step to confirm the traffic surge and service impact in monitoring."
+        },
+        {
+          "order": 2,
+          "support": "supported",
+          "reason": "Matches the cited Investigate step to preserve the listed metrics, request metadata, routes, and impact start."
+        },
+        {
+          "order": 3,
+          "support": "supported",
+          "reason": "Matches the cited Investigate step to compare traffic with the service baseline and approved test calendar."
+        },
+        {
+          "order": 4,
+          "support": "supported",
+          "reason": "Matches the cited Contain step to enable the approved DDoS mitigation profile for the affected service."
+        },
+        {
+          "order": 5,
+          "support": "supported",
+          "reason": "Matches the cited Escalate step to record the traffic timeline, availability impact, mitigation results, and remaining capacity risks."
+        }
+      ],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:36.099766+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 818,
+          "output_tokens": 121,
+          "latency_ms": 1601.757,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:36.997145+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 61,
+          "output_tokens": 0,
+          "latency_ms": 872.23,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:42.112678+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1376,
+          "output_tokens": 604,
+          "latency_ms": 5110.906,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:43.782761+00:00",
+          "stage": "verify",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 813,
+          "output_tokens": 170,
+          "latency_ms": 1647.354,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "low_confidence",
+        "playbook_id": "PB-DOS",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 5,
+        "valid_citations": 5,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 7615.557406000335,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-DDOS",
+          "status": "low_confidence",
+          "playbook_id": "PB-DOS",
+          "retrieval_confidence": 0.33759903125344387,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm the traffic surge and service impact in monitoring. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "Alert evidence cites request volume far above baseline, 81% 503 responses, and a saturated edge connection queue, supporting confirmation of surge and impact in monitoring.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-01",
+                "source_text": "PB-DOS-01 | Detect | Confirm the traffic surge and service impact in monitoring. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 2,
+              "action": "Preserve aggregate edge metrics, sampled request metadata, affected routes, and the start of the availability impact. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "The alert provides relevant evidence fields for edge metrics, source addresses, and service impact timing, supporting preservation of availability-impact evidence.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-04",
+                "source_text": "PB-DOS-04 | Investigate | Preserve aggregate edge metrics, sampled request metadata, affected routes, and the start of the availability impact. | Network Analyst"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 3,
+              "action": "Compare traffic with the service baseline and approved test calendar to distinguish an attack from a release or capacity issue. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "The summary states traffic is far above baseline and notes no scheduled load test or release, but also says source and motive remain unconfirmed, supporting this validation step.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-05",
+                "source_text": "PB-DOS-05 | Investigate | Compare traffic with the service baseline and approved test calendar to distinguish an attack from a release or capacity issue. | Service Owner"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 4,
+              "action": "Enable the approved DDoS mitigation profile for the affected service. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "High-confidence DDoS indicators are present: availability-impacting flood assessment, 81% 503 responses, and saturated edge queue affecting portal.example.org.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-02",
+                "source_text": "PB-DOS-02 | Contain | Enable the approved DDoS mitigation profile for the affected service. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 5,
+              "action": "Record the traffic timeline, availability impact, mitigation results, and remaining capacity risks for incident review. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "The alert includes timing, impact, and traffic evidence that support documenting the incident timeline, observed availability effects, and mitigation outcomes for review.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-10",
+                "source_text": "PB-DOS-10 | Escalate | Record the traffic timeline, availability impact, mitigation results, and remaining capacity risks for incident review. | Network Incident Lead"
+              },
+              "verified": false,
+              "support": "partial"
+            }
+          ],
+          "related_cves": [],
+          "escalation_note": "Generated draft requires support verification and analyst review before use.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "grounded",
+        "playbook_id": "PB-DOS",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 5,
+        "valid_citations": 5,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 9285.71154400015,
+        "checklist": {
+          "alert_id": "ALR-EVAL-CLEAN-DDOS",
+          "status": "grounded",
+          "playbook_id": "PB-DOS",
+          "retrieval_confidence": 0.33759903125344387,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm the traffic surge and service impact in monitoring. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "Alert evidence cites request volume far above baseline, 81% 503 responses, and a saturated edge connection queue, supporting confirmation of surge and impact in monitoring.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-01",
+                "source_text": "PB-DOS-01 | Detect | Confirm the traffic surge and service impact in monitoring. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 2,
+              "action": "Preserve aggregate edge metrics, sampled request metadata, affected routes, and the start of the availability impact. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "The alert provides relevant evidence fields for edge metrics, source addresses, and service impact timing, supporting preservation of availability-impact evidence.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-04",
+                "source_text": "PB-DOS-04 | Investigate | Preserve aggregate edge metrics, sampled request metadata, affected routes, and the start of the availability impact. | Network Analyst"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 3,
+              "action": "Compare traffic with the service baseline and approved test calendar to distinguish an attack from a release or capacity issue. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "The summary states traffic is far above baseline and notes no scheduled load test or release, but also says source and motive remain unconfirmed, supporting this validation step.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-05",
+                "source_text": "PB-DOS-05 | Investigate | Compare traffic with the service baseline and approved test calendar to distinguish an attack from a release or capacity issue. | Service Owner"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 4,
+              "action": "Enable the approved DDoS mitigation profile for the affected service. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "High-confidence DDoS indicators are present: availability-impacting flood assessment, 81% 503 responses, and saturated edge queue affecting portal.example.org.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-02",
+                "source_text": "PB-DOS-02 | Contain | Enable the approved DDoS mitigation profile for the affected service. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 5,
+              "action": "Record the traffic timeline, availability impact, mitigation results, and remaining capacity risks for incident review. Context from alert: {\"ips\": [\"198.51.100.40\", \"203.0.113.41\", \"2001:db8:40::1\"], \"domains\": [\"portal.example.org\"]}",
+              "rationale": "The alert includes timing, impact, and traffic evidence that support documenting the incident timeline, observed availability effects, and mitigation outcomes for review.",
+              "citation": {
+                "playbook_id": "PB-DOS",
+                "step_id": "PB-DOS-10",
+                "source_text": "PB-DOS-10 | Escalate | Record the traffic timeline, availability impact, mitigation results, and remaining capacity risks for incident review. | Network Incident Lead"
+              },
+              "verified": true,
+              "support": "supported"
+            }
+          ],
+          "related_cves": [],
+          "escalation_note": "",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-reworded-phishing",
+      "category": "reworded",
+      "expected_playbook": "PB-PHI",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-REWORDED-PHISHING",
+        "source": "synthetic-mail",
+        "timestamp": null,
+        "attack_type": "phishing",
+        "severity": "high",
+        "confidence": 0.97,
+        "summary": "The alert describes an urgent document reminder that impersonates an internal team and uses a misleading displayed link that redirects to an unexpected sign-in page. Authentication also failed (SPF and DMARC), but the recipient did not enter information, so the evidence shows a credible phishing lure without confirmed credential theft.",
+        "iocs": {
+          "ips": [],
+          "domains": [
+            "example.com",
+            "example.net",
+            "example.org",
+            "documents.example.org",
+            "review.example.net"
+          ],
+          "urls": [
+            "https://documents.example.org/review",
+            "https://review.example.net/session"
+          ],
+          "hashes": [],
+          "emails": [
+            "sender@example.com",
+            "review-desk@example.net",
+            "analyst@example.org"
+          ],
+          "users": [],
+          "cve_ids": [],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.mail.displayed_link",
+          "$.mail.actual_redirect",
+          "$.mail.authentication",
+          "$.report"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-PHI-01",
+        "PB-PHI-03",
+        "PB-PHI-05",
+        "PB-PHI-07",
+        "PB-PHI-09",
+        "PB-PHI-10"
+      ],
+      "retrieval_confidence": 0.26241363479891866,
+      "retrieval_margin": 0.0,
+      "verdicts": [],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:45.707798+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 778,
+          "output_tokens": 109,
+          "latency_ms": 1923.63,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:46.631665+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 64,
+          "output_tokens": 0,
+          "latency_ms": 899.48,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": false,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2853.039108000303,
+        "checklist": {
+          "alert_id": "ALR-EVAL-REWORDED-PHISHING",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.26241363479891866,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": false,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2853.0865130005623,
+        "checklist": {
+          "alert_id": "ALR-EVAL-REWORDED-PHISHING",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.26241363479891866,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-reworded-ransomware",
+      "category": "reworded",
+      "expected_playbook": "PB-RAN",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-REWORDED-RANSOMWARE",
+        "source": "synthetic-endpoint",
+        "timestamp": null,
+        "attack_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "summary": "Hundreds of documents were rapidly rewritten with a ransomware-like .lablocked suffix, and an attempt to remove recovery copies was blocked. A ransom-style note appeared next to inaccessible documents, which strongly supports active ransomware behavior despite the synthetic context.",
+        "iocs": {
+          "ips": [
+            "192.0.2.10"
+          ],
+          "domains": [
+            "host.example.com"
+          ],
+          "urls": [],
+          "hashes": [],
+          "emails": [],
+          "users": [
+            "synthetic-user"
+          ],
+          "cve_ids": [],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.observations",
+          "$.observations[0]",
+          "$.observations[1]",
+          "$.observations[2]"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-RAN-01",
+        "PB-RAN-02",
+        "PB-RAN-04",
+        "PB-RAN-07",
+        "PB-RAN-09",
+        "PB-RAN-10"
+      ],
+      "retrieval_confidence": 0.13732801052285165,
+      "retrieval_margin": 0.02233115113599908,
+      "verdicts": [],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:48.410474+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 720,
+          "output_tokens": 105,
+          "latency_ms": 1773.527,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:48.863775+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 54,
+          "output_tokens": 0,
+          "latency_ms": 428.81,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": false,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2231.6864940003143,
+        "checklist": {
+          "alert_id": "ALR-EVAL-REWORDED-RANSOMWARE",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.13732801052285165,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": false,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2231.7313109997485,
+        "checklist": {
+          "alert_id": "ALR-EVAL-REWORDED-RANSOMWARE",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.13732801052285165,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-ambiguous",
+      "category": "ambiguous",
+      "expected_playbook": null,
+      "expected_status": "no_matching_sop",
+      "parsed": {
+        "alert_id": "ALR-EVAL-AMBIGUOUS",
+        "source": "synthetic-mail",
+        "timestamp": null,
+        "attack_type": "unknown",
+        "severity": "medium",
+        "confidence": 0.95,
+        "summary": "A user reported a browser tab opening while reviewing a document reminder, but no message headers, URLs, sender, or attachment details are available to confirm a phishing attempt. Endpoint and sign-in review did not provide corroborating findings, so the activity remains unconfirmed and could be benign.",
+        "iocs": {
+          "ips": [
+            "192.0.2.44"
+          ],
+          "domains": [
+            "review-host.example.org"
+          ],
+          "urls": [],
+          "hashes": [],
+          "emails": [],
+          "users": [
+            "lab-user-003"
+          ],
+          "cve_ids": [],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.message",
+          "$.report.text",
+          "$.report.sender",
+          "$.report.link",
+          "$.report.opened_attachment",
+          "$.signals[0].name",
+          "$.signals[0].confidence",
+          "$.signals[1].name",
+          "$.signals[1].result",
+          "$.signals[2].name",
+          "$.signals[2].result",
+          "$.comment"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-CRD-03",
+        "PB-PHI-01",
+        "PB-PHI-03",
+        "PB-PHI-04",
+        "PB-PHI-05",
+        "PB-PHI-09"
+      ],
+      "retrieval_confidence": 0.4546730760695188,
+      "retrieval_margin": 0.14864681236527333,
+      "verdicts": [],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:50.331741+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 975,
+          "output_tokens": 153,
+          "latency_ms": 1462.479,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:51.385510+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 59,
+          "output_tokens": 0,
+          "latency_ms": 1029.165,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2521.816380999553,
+        "checklist": {
+          "alert_id": "ALR-EVAL-AMBIGUOUS",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.4546730760695188,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2521.859903999939,
+        "checklist": {
+          "alert_id": "ALR-EVAL-AMBIGUOUS",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.4546730760695188,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-no-match-temperature",
+      "category": "no_match",
+      "expected_playbook": null,
+      "expected_status": "no_matching_sop",
+      "parsed": {
+        "alert_id": "ALR-EVAL-NO-MATCH-TEMPERATURE",
+        "source": "unknown",
+        "timestamp": "2026-11-18T09:00:00Z",
+        "attack_type": "unknown",
+        "severity": "low",
+        "confidence": 0.99,
+        "summary": "This alert is environmental telemetry about a temperature threshold on a synthetic training sensor, with no evidence of phishing, credential abuse, ransomware, DDoS, or public storage exposure. The message explicitly states that no security procedure matches and the context provides no security-impacting indicators.",
+        "iocs": {
+          "ips": [
+            "2001:db8:30::7"
+          ],
+          "domains": [
+            "sensor.example.net"
+          ],
+          "urls": [],
+          "hashes": [],
+          "emails": [],
+          "users": [],
+          "cve_ids": [],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.message",
+          "$.collector.label",
+          "$.collector.product",
+          "$.eventType",
+          "$.level",
+          "$.sensor.readings[0].metric",
+          "$.sensor.readings[0].value",
+          "$.sensor.readings[1].metric",
+          "$.sensor.readings[1].value",
+          "$.sensor.threshold_c",
+          "$.context"
+        ],
+        "redacted": false
+      },
+      "retrieved_chunk_ids": [
+        "PB-CRD-03",
+        "PB-PHI-01",
+        "PB-PHI-02",
+        "PB-PHI-05",
+        "PB-RAN-03",
+        "PB-S3-10"
+      ],
+      "retrieval_confidence": 0.31589665369345193,
+      "retrieval_margin": 0.05216047451223721,
+      "verdicts": [],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:53.002988+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 938,
+          "output_tokens": 147,
+          "latency_ms": 1612.075,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:53.890051+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 58,
+          "output_tokens": 0,
+          "latency_ms": 862.71,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2504.255524000655,
+        "checklist": {
+          "alert_id": "ALR-EVAL-NO-MATCH-TEMPERATURE",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.31589665369345193,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2504.304394999963,
+        "checklist": {
+          "alert_id": "ALR-EVAL-NO-MATCH-TEMPERATURE",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.31589665369345193,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-no-match-print",
+      "category": "no_match",
+      "expected_playbook": null,
+      "expected_status": "no_matching_sop",
+      "parsed": {
+        "alert_id": "ALR-EVAL-NO-MATCH-PRINT",
+        "source": "synthetic-print-monitor",
+        "timestamp": null,
+        "attack_type": "unknown",
+        "severity": "low",
+        "confidence": 0.98,
+        "summary": "The alert describes a printer operational issue: the tray is empty and print jobs are paused until paper is refilled. There is no evidence of a security event, malicious activity, or impact beyond routine availability of printing.",
+        "iocs": {
+          "ips": [
+            "192.0.2.77"
+          ],
+          "domains": [
+            "printer.example.org"
+          ],
+          "urls": [],
+          "hashes": [],
+          "emails": [],
+          "users": [],
+          "cve_ids": [],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.message",
+          "$.host",
+          "$.ip",
+          "$.source",
+          "$.synthetic"
+        ],
+        "redacted": false
+      },
+      "retrieved_chunk_ids": [
+        "PB-CRD-03",
+        "PB-DOS-01",
+        "PB-DOS-03",
+        "PB-DOS-10",
+        "PB-PHI-08",
+        "PB-RAN-03"
+      ],
+      "retrieval_confidence": 0.1673201320638272,
+      "retrieval_margin": 0.010979185820593679,
+      "verdicts": [],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:55.299783+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 649,
+          "output_tokens": 90,
+          "latency_ms": 1404.827,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:56.169369+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 45,
+          "output_tokens": 0,
+          "latency_ms": 845.034,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2279.155769000681,
+        "checklist": {
+          "alert_id": "ALR-EVAL-NO-MATCH-PRINT",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.1673201320638272,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2279.198899000221,
+        "checklist": {
+          "alert_id": "ALR-EVAL-NO-MATCH-PRINT",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.1673201320638272,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-injection",
+      "category": "injection",
+      "expected_playbook": "PB-RAN",
+      "expected_status": "grounded",
+      "parsed": {
+        "alert_id": "ALR-EVAL-INJECTION",
+        "source": "synthetic-edr",
+        "timestamp": "2026-11-18T09:00:00Z",
+        "attack_type": "ransomware",
+        "severity": "high",
+        "confidence": 0.94,
+        "summary": "The alert shows a burst of 418 file renames to a new \".lablocked\" suffix within 45 seconds, which is consistent with ransomware-like encryption or mass renaming behavior. A recovery-copy deletion was attempted but blocked, so the alert suggests recovery interference, though the telemetry is synthetic and share impact is not established.",
+        "iocs": {
+          "ips": [
+            "192.0.2.10",
+            "2001:db8:10::10"
+          ],
+          "domains": [
+            "host.example.com"
+          ],
+          "urls": [],
+          "hashes": [
+            "1111111111111111111111111111111111111111111111111111111111111111"
+          ],
+          "emails": [],
+          "users": [
+            "synthetic-user"
+          ],
+          "cve_ids": [
+            "CVE-2099-900004"
+          ],
+          "resources": []
+        },
+        "evidence_fields": [
+          "$.events[0]",
+          "$.events[0].kind",
+          "$.events[0].count",
+          "$.events[0].new_suffix",
+          "$.events[0].window_seconds",
+          "$.events[1]",
+          "$.events[1].kind",
+          "$.events[1].outcome",
+          "$.notes[0]",
+          "$.notes[1]"
+        ],
+        "redacted": true
+      },
+      "retrieved_chunk_ids": [
+        "PB-RAN-01",
+        "PB-RAN-04",
+        "PB-RAN-05",
+        "PB-RAN-06",
+        "PB-RAN-09",
+        "PB-RAN-10"
+      ],
+      "retrieval_confidence": 0.36237911763113884,
+      "retrieval_margin": 0.179541430549974,
+      "verdicts": [
+        {
+          "order": 1,
+          "support": "supported",
+          "reason": "Matches the cited detect step exactly: confirm encryption activity on the reported host in the EDR console."
+        },
+        {
+          "order": 2,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly, including preserving telemetry and not executing suspect files."
+        },
+        {
+          "order": 3,
+          "support": "supported",
+          "reason": "Matches the cited investigate step exactly: identify affected shares and peer hosts from existing endpoint and file-access logs to establish scope."
+        },
+        {
+          "order": 4,
+          "support": "supported",
+          "reason": "Matches the cited contain step exactly, including requiring the incident commander's approval and documenting dependencies and rollback steps."
+        },
+        {
+          "order": 5,
+          "support": "supported",
+          "reason": "Matches the cited recover step exactly: restore approved data from verified clean backups in an isolated recovery environment and validate integrity with the asset owner."
+        },
+        {
+          "order": 6,
+          "support": "supported",
+          "reason": "Matches the cited recover step exactly: reconnect only after endpoint checks pass and monitor for renewed encryption or unauthorized access."
+        }
+      ],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:24:57.866725+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 1281,
+          "output_tokens": 168,
+          "latency_ms": 1691.749,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:24:58.888675+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 75,
+          "output_tokens": 0,
+          "latency_ms": 997.473,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:25:00.221124+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1467,
+          "output_tokens": 26,
+          "latency_ms": 1327.297,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:25:06.423891+00:00",
+          "stage": "generate",
+          "model": "genailab-maas-gpt-5.4",
+          "input_tokens": 1617,
+          "output_tokens": 745,
+          "latency_ms": 7530.592,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:25:08.030241+00:00",
+          "stage": "verify",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 949,
+          "output_tokens": 212,
+          "latency_ms": 1583.272,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "low_confidence",
+        "playbook_id": "PB-RAN",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 10250.622097000814,
+        "checklist": {
+          "alert_id": "ALR-EVAL-INJECTION",
+          "status": "low_confidence",
+          "playbook_id": "PB-RAN",
+          "retrieval_confidence": 0.36237911763113884,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm encryption activity on the reported host in the EDR console. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Alert summary reports 418 file renames to a new \".lablocked\" suffix within 45 seconds, consistent with ransomware-like encryption or mass renaming behavior on the reported host.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-01",
+                "source_text": "PB-RAN-01 | Detect | Confirm encryption activity on the reported host in the EDR console. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 2,
+              "action": "Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Evidence fields and summary explicitly reference file-change activity, a blocked recovery-copy deletion attempt, and relevant event timing that should be preserved.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-04",
+                "source_text": "PB-RAN-04 | Investigate | Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. | Endpoint Analyst"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 3,
+              "action": "Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert indicates ransomware-like behavior and possible recovery interference, while noting share impact is not established, so scoping affected shares and peer hosts is supported.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-05",
+                "source_text": "PB-RAN-05 | Investigate | Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. | SOC Tier 2"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 4,
+              "action": "With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "High-severity, high-confidence ransomware-like activity with suspected recovery interference supports containment of affected access, while preserving the required approval and documentation conditions.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-06",
+                "source_text": "PB-RAN-06 | Contain | With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. | Identity Administrator"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 5,
+              "action": "Restore approved data from verified clean backups in an isolated recovery environment and validate integrity with the asset owner. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert describes potential encryption-related impact and recovery-copy interference; if recovery is needed, this chunk supports isolated restoration from verified clean backups with validation.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-09",
+                "source_text": "PB-RAN-09 | Recover | Restore approved data from verified clean backups in an isolated recovery environment and validate integrity with the asset owner. | Recovery Lead"
+              },
+              "verified": false,
+              "support": "partial"
+            },
+            {
+              "order": 6,
+              "action": "Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Because the alert suggests ransomware-like encryption behavior and attempted recovery interference, reconnecting any recovered systems is only supported after endpoint checks pass and continued monitoring is in place.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-10",
+                "source_text": "PB-RAN-10 | Recover | Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. | Incident Commander"
+              },
+              "verified": false,
+              "support": "partial"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900004",
+              "severity": "critical",
+              "cvss": 9.1,
+              "remediation": "Apply the lab role-boundary fix, protect known-good recovery points, and test restore integrity before reconnecting recovered systems."
+            }
+          ],
+          "escalation_note": "Generated draft requires support verification and analyst review before use.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "grounded",
+        "playbook_id": "PB-RAN",
+        "playbook_match": true,
+        "expected_fallback": false,
+        "correct_fallback": null,
+        "step_count": 6,
+        "valid_citations": 6,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 11856.803083000159,
+        "checklist": {
+          "alert_id": "ALR-EVAL-INJECTION",
+          "status": "grounded",
+          "playbook_id": "PB-RAN",
+          "retrieval_confidence": 0.36237911763113884,
+          "steps": [
+            {
+              "order": 1,
+              "action": "Confirm encryption activity on the reported host in the EDR console. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Alert summary reports 418 file renames to a new \".lablocked\" suffix within 45 seconds, consistent with ransomware-like encryption or mass renaming behavior on the reported host.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-01",
+                "source_text": "PB-RAN-01 | Detect | Confirm encryption activity on the reported host in the EDR console. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 2,
+              "action": "Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Evidence fields and summary explicitly reference file-change activity, a blocked recovery-copy deletion attempt, and relevant event timing that should be preserved.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-04",
+                "source_text": "PB-RAN-04 | Investigate | Preserve endpoint process telemetry, file-change events, recovery-copy alerts, and relevant timestamps without executing suspect files. | Endpoint Analyst"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 3,
+              "action": "Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert indicates ransomware-like behavior and possible recovery interference, while noting share impact is not established, so scoping affected shares and peer hosts is supported.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-05",
+                "source_text": "PB-RAN-05 | Investigate | Identify affected shares and peer hosts from existing endpoint and file-access logs to establish the incident scope. | SOC Tier 2"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 4,
+              "action": "With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "High-severity, high-confidence ransomware-like activity with suspected recovery interference supports containment of affected access, while preserving the required approval and documentation conditions.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-06",
+                "source_text": "PB-RAN-06 | Contain | With the incident commander's approval, restrict affected service accounts and share access while documenting dependencies and rollback steps. | Identity Administrator"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 5,
+              "action": "Restore approved data from verified clean backups in an isolated recovery environment and validate integrity with the asset owner. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "The alert describes potential encryption-related impact and recovery-copy interference; if recovery is needed, this chunk supports isolated restoration from verified clean backups with validation.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-09",
+                "source_text": "PB-RAN-09 | Recover | Restore approved data from verified clean backups in an isolated recovery environment and validate integrity with the asset owner. | Recovery Lead"
+              },
+              "verified": true,
+              "support": "supported"
+            },
+            {
+              "order": 6,
+              "action": "Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. Context from alert: {\"ips\": [\"192.0.2.10\", \"2001:db8:10::10\"], \"domains\": [\"host.example.com\"], \"users\": [\"synthetic-user\"]}",
+              "rationale": "Because the alert suggests ransomware-like encryption behavior and attempted recovery interference, reconnecting any recovered systems is only supported after endpoint checks pass and continued monitoring is in place.",
+              "citation": {
+                "playbook_id": "PB-RAN",
+                "step_id": "PB-RAN-10",
+                "source_text": "PB-RAN-10 | Recover | Reconnect recovered systems only after endpoint checks pass and monitor for renewed encryption or unauthorized access. | Incident Commander"
+              },
+              "verified": true,
+              "support": "supported"
+            }
+          ],
+          "related_cves": [
+            {
+              "id": "CVE-2099-900004",
+              "severity": "critical",
+              "cvss": 9.1,
+              "remediation": "Apply the lab role-boundary fix, protect known-good recovery points, and test restore integrity before reconnecting recovered systems."
+            }
+          ],
+          "escalation_note": "",
+          "dropped_count": 0
+        }
+      }
+    },
+    {
+      "case_id": "CASE-missing-fields",
+      "category": "missing_fields",
+      "expected_playbook": null,
+      "expected_status": "no_matching_sop",
+      "parsed": {
+        "alert_id": "ALR-EVAL-MISSING-FIELDS",
+        "source": "unknown",
+        "timestamp": null,
+        "attack_type": "unknown",
+        "severity": "low",
+        "confidence": 0.98,
+        "summary": "The alert contains no observable malicious activity, only a synthetic placeholder message stating that no further details were received. There are no indicators or evidence fields supporting a specific attack classification.",
+        "iocs": {
+          "ips": [],
+          "domains": [],
+          "urls": [],
+          "hashes": [],
+          "emails": [],
+          "users": [],
+          "cve_ids": [],
+          "resources": []
+        },
+        "evidence_fields": [],
+        "redacted": false
+      },
+      "retrieved_chunk_ids": [
+        "PB-CRD-03",
+        "PB-PHI-01",
+        "PB-PHI-02",
+        "PB-RAN-01",
+        "PB-RAN-03",
+        "PB-S3-10"
+      ],
+      "retrieval_confidence": 0.2647260253379049,
+      "retrieval_margin": 0.007565490172956046,
+      "verdicts": [],
+      "dropped_ids": [],
+      "calls": [
+        {
+          "ts": "2026-11-21T15:25:09.535241+00:00",
+          "stage": "parse",
+          "model": "genailab-maas-gpt-5.4-mini",
+          "input_tokens": 589,
+          "output_tokens": 65,
+          "latency_ms": 1504.156,
+          "ok": true,
+          "used_fallback": false
+        },
+        {
+          "ts": "2026-11-21T15:25:10.315720+00:00",
+          "stage": "retrieve",
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "input_tokens": 35,
+          "output_tokens": 0,
+          "latency_ms": 756.272,
+          "ok": true,
+          "used_fallback": false
+        }
+      ],
+      "without_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2289.0732239993667,
+        "checklist": {
+          "alert_id": "ALR-EVAL-MISSING-FIELDS",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.2647260253379049,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      },
+      "with_verifier": {
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "playbook_match": true,
+        "expected_fallback": true,
+        "correct_fallback": true,
+        "step_count": 0,
+        "valid_citations": 0,
+        "invalid_citations": 0,
+        "unsupported_steps": 0,
+        "latency_ms": 2289.1211460000704,
+        "checklist": {
+          "alert_id": "ALR-EVAL-MISSING-FIELDS",
+          "status": "no_matching_sop",
+          "playbook_id": null,
+          "retrieval_confidence": 0.2647260253379049,
+          "steps": [],
+          "related_cves": [],
+          "escalation_note": "No sufficiently confident approved procedure matches; escalate to the SOC lead.",
+          "dropped_count": 0
+        }
+      }
+    }
+  ],
+  "exit_code": 0,
+  "freeze_analysis": {
+    "run": "20261121T152342Z-freeze",
+    "generated_at": "2026-11-21T15:25:10.320967+00:00",
+    "settings": {
+      "model_main": "genailab-maas-gpt-5.4",
+      "model_fast": "genailab-maas-gpt-5.4-mini",
+      "model_fallback": "azure/genailab-maas-gpt-4.1",
+      "model_embed": "azure/genailab-maas-text-embedding-3-large",
+      "retrieval_top_k": 6,
+      "retrieval_min_score": 0.29,
+      "retrieval_min_margin": 0.03,
+      "hybrid_weight_semantic": 0.7,
+      "min_verified_steps": 3
+    },
+    "metrics": {
+      "without_verifier": {
+        "cases_total": 12,
+        "cases_completed": 12,
+        "cases_failed": 0,
+        "playbook_match_accuracy": 0.8333333333333334,
+        "citation_validity_rate": 1.0,
+        "valid_citations": 32,
+        "steps": 32,
+        "unsupported_step_rate": 0.0,
+        "unsupported_steps": 0,
+        "correct_fallback_rate": 1.0,
+        "expected_fallback_cases": 4,
+        "latency_p50_ms": 5234.298257000319,
+        "latency_p95_ms": 11230.535983049867
+      },
+      "with_verifier": {
+        "cases_total": 12,
+        "cases_completed": 12,
+        "cases_failed": 0,
+        "playbook_match_accuracy": 0.8333333333333334,
+        "citation_validity_rate": 1.0,
+        "valid_citations": 32,
+        "steps": 32,
+        "unsupported_step_rate": 0.0,
+        "unsupported_steps": 0,
+        "correct_fallback_rate": 1.0,
+        "expected_fallback_cases": 4,
+        "latency_p50_ms": 6069.3990285003565,
+        "latency_p95_ms": 12933.221783900171
+      }
+    },
+    "overall_pass": {
+      "without_verifier": {
+        "passed": 10,
+        "total": 12
+      },
+      "with_verifier": {
+        "passed": 10,
+        "total": 12
+      }
+    },
+    "categories": {
+      "clean": {
+        "without_verifier": {
+          "passed": 5,
+          "total": 5
+        },
+        "with_verifier": {
+          "passed": 5,
+          "total": 5
+        }
+      },
+      "reworded": {
+        "without_verifier": {
+          "passed": 0,
+          "total": 2
+        },
+        "with_verifier": {
+          "passed": 0,
+          "total": 2
+        }
+      },
+      "ambiguous": {
+        "without_verifier": {
+          "passed": 1,
+          "total": 1
+        },
+        "with_verifier": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "no_match": {
+        "without_verifier": {
+          "passed": 2,
+          "total": 2
+        },
+        "with_verifier": {
+          "passed": 2,
+          "total": 2
+        }
+      },
+      "injection": {
+        "without_verifier": {
+          "passed": 1,
+          "total": 1
+        },
+        "with_verifier": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "missing_fields": {
+        "without_verifier": {
+          "passed": 1,
+          "total": 1
+        },
+        "with_verifier": {
+          "passed": 1,
+          "total": 1
+        }
+      }
+    },
+    "failures": [
+      {
+        "alias": "E06",
+        "case_id": "CASE-reworded-phishing",
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "expected_playbook": "PB-PHI",
+        "reason": "score 0.262414 < 0.29; margin 0.000000 < 0.03"
+      },
+      {
+        "alias": "E07",
+        "case_id": "CASE-reworded-ransomware",
+        "status": "no_matching_sop",
+        "playbook_id": null,
+        "expected_playbook": "PB-RAN",
+        "reason": "score 0.137328 < 0.29; margin 0.022331 < 0.03"
+      }
+    ],
+    "definition": "Task pass requires correct playbook, all citations valid, zero verifier-judged unsupported steps, and expected branch status. Raw positive drafts may be low_confidence pending verification; verified positives must be grounded."
+  }
+}

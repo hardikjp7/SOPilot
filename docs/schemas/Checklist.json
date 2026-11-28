@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "playbook_id": {
+          "title": "Playbook Id",
+          "type": "string"
+        },
+        "step_id": {
+          "title": "Step Id",
+          "type": "string"
+        },
+        "source_text": {
+          "title": "Source Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "playbook_id",
+        "step_id",
+        "source_text"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "RelatedCVE": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "cvss": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cvss"
+        },
+        "remediation": {
+          "title": "Remediation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "severity",
+        "cvss",
+        "remediation"
+      ],
+      "title": "RelatedCVE",
+      "type": "object"
+    },
+    "Step": {
+      "additionalProperties": false,
+      "properties": {
+        "order": {
+          "minimum": 1,
+          "title": "Order",
+          "type": "integer"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "citation": {
+          "$ref": "#/$defs/Citation"
+        },
+        "verified": {
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "support": {
+          "enum": [
+            "supported",
+            "partial"
+          ],
+          "title": "Support",
+          "type": "string"
+        }
+      },
+      "required": [
+        "order",
+        "action",
+        "rationale",
+        "citation",
+        "verified",
+        "support"
+      ],
+      "title": "Step",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "alert_id": {
+      "title": "Alert Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "grounded",
+        "low_confidence",
+        "no_matching_sop"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "playbook_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Playbook Id"
+    },
+    "retrieval_confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Retrieval Confidence",
+      "type": "number"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/Step"
+      },
+      "title": "Steps",
+      "type": "array"
+    },
+    "related_cves": {
+      "items": {
+        "$ref": "#/$defs/RelatedCVE"
+      },
+      "title": "Related Cves",
+      "type": "array"
+    },
+    "escalation_note": {
+      "title": "Escalation Note",
+      "type": "string"
+    },
+    "dropped_count": {
+      "minimum": 0,
+      "title": "Dropped Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "alert_id",
+    "status",
+    "playbook_id",
+    "retrieval_confidence",
+    "steps",
+    "related_cves",
+    "escalation_note",
+    "dropped_count"
+  ],
+  "title": "Checklist",
+  "type": "object"
+}

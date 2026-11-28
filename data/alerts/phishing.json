@@ -1,0 +1,43 @@
+{
+  "alert_id": "ALR-PHI",
+  "source": "synthetic-mail",
+  "synthetic": true,
+  "risk": "HIGH",
+  "rule": {
+    "code": "mail-redirect-and-sender-mismatch",
+    "confidence_pct": "92"
+  },
+  "message": {
+    "from": "sender@example.com",
+    "replyTo": "review-desk@example.net",
+    "display_name": "Internal Document Review",
+    "subject": "Document review expires today",
+    "url": "https://example.com/login",
+    "recipient": "analyst@example.org",
+    "headers": {
+      "Message-ID": "<synthetic-msg-0042@example.com>",
+      "Authentication-Results": "mail.example.org; spf=fail; dkim=none; dmarc=fail",
+      "Received": "from relay.example.net (203.0.113.42) by mail.example.org"
+    },
+    "links": [
+      {
+        "display": "https://documents.example.org/review",
+        "href": "https://example.com/login",
+        "redirects": ["https://review.example.net/session"]
+      }
+    ],
+    "attachments": [],
+    "delivery_state": "delivered"
+  },
+  "timestamp": "2026-11-18T09:00:00Z",
+  "userReport": {
+    "reported_at": "2026-11-18T09:06:12+00:00",
+    "comment": "The sender looked familiar, but the sign-in page address changed. I closed it without entering any information.",
+    "clicked": true
+  },
+  "scanner_context": {
+    "product": "Training Link Inspector 2.0",
+    "potential_cve": "CVE-2099-900002",
+    "note": "Fictional exercise association; this finding alone does not establish exploitation."
+  }
+}

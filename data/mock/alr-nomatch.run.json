@@ -1,0 +1,43 @@
+{
+  "run_id": "RUN-MOCK-ALR-NOMATCH",
+  "parsed": {
+    "alert_id": "ALR-NOMATCH",
+    "source": "unknown",
+    "timestamp": "2026-11-18T09:00:00Z",
+    "attack_type": "unknown",
+    "severity": "medium",
+    "confidence": 0.2,
+    "summary": "Synthetic no matching playbook alert for UI development.",
+    "iocs": {
+      "ips": [],
+      "domains": [],
+      "urls": [],
+      "hashes": [],
+      "emails": [],
+      "users": [],
+      "cve_ids": [],
+      "resources": []
+    },
+    "evidence_fields": [
+      "$.message"
+    ],
+    "redacted": false
+  },
+  "checklist": {
+    "alert_id": "ALR-NOMATCH",
+    "status": "no_matching_sop",
+    "playbook_id": null,
+    "retrieval_confidence": 0.2,
+    "steps": [],
+    "related_cves": [],
+    "escalation_note": "Request SOC lead review; the available procedure is insufficient.",
+    "dropped_count": 0
+  },
+  "timings_ms": {
+    "parse": 50.0,
+    "retrieve": 50.0,
+    "generate": 100.0,
+    "verify": 100.0,
+    "total": 300.0
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "run_id": "RUN-MOCK-ALR-PHI",
+  "parsed": {
+    "alert_id": "ALR-PHI",
+    "source": "synthetic-mail",
+    "timestamp": "2026-11-18T09:00:00Z",
+    "attack_type": "phishing",
+    "severity": "medium",
+    "confidence": 0.95,
+    "summary": "Synthetic phishing alert for UI development.",
+    "iocs": {
+      "ips": [],
+      "domains": [
+        "example.com"
+      ],
+      "urls": [
+        "https://example.com/login"
+      ],
+      "hashes": [],
+      "emails": [
+        "sender@example.com",
+        "analyst@example.org"
+      ],
+      "users": [],
+      "cve_ids": [],
+      "resources": []
+    },
+    "evidence_fields": [
+      "$.message"
+    ],
+    "redacted": false
+  },
+  "checklist": {
+    "alert_id": "ALR-PHI",
+    "status": "grounded",
+    "playbook_id": "PB-PHI",
+    "retrieval_confidence": 0.95,
+    "steps": [
+      {
+        "order": 1,
+        "action": "Review the reported message headers and URL in the mail security console.",
+        "rationale": "The synthetic fixture supplies evidence for this approved playbook step.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-01",
+          "source_text": "PB-PHI-01 | Detect | Review the reported message headers and URL in the mail security console. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "supported"
+      },
+      {
+        "order": 2,
+        "action": "Quarantine the reported message using the mail security console.",
+        "rationale": "The synthetic fixture supplies evidence for this approved playbook step.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-02",
+          "source_text": "PB-PHI-02 | Contain | Quarantine the reported message using the mail security console. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "supported"
+      },
+      {
+        "order": 3,
+        "action": "Review sign-in logs for the reported account for suspicious activity.",
+        "rationale": "The synthetic fixture supplies evidence for this approved playbook step.",
+        "citation": {
+          "playbook_id": "PB-PHI",
+          "step_id": "PB-PHI-03",
+          "source_text": "PB-PHI-03 | Investigate | Review sign-in logs for the reported account for suspicious activity. | SOC Tier 2"
+        },
+        "verified": true,
+        "support": "supported"
+      }
+    ],
+    "related_cves": [],
+    "escalation_note": "",
+    "dropped_count": 0
+  },
+  "timings_ms": {
+    "parse": 50.0,
+    "retrieve": 50.0,
+    "generate": 100.0,
+    "verify": 100.0,
+    "total": 300.0
+  }
+}

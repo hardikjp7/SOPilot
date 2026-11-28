@@ -1,0 +1,295 @@
+{
+  "$defs": {
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "playbook_id": {
+          "title": "Playbook Id",
+          "type": "string"
+        },
+        "step_id": {
+          "title": "Step Id",
+          "type": "string"
+        },
+        "source_text": {
+          "title": "Source Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "playbook_id",
+        "step_id",
+        "source_text"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "ContainmentAction": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "citation": {
+          "$ref": "#/$defs/Citation"
+        },
+        "status": {
+          "enum": [
+            "recommended",
+            "approved"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action",
+        "citation",
+        "status"
+      ],
+      "title": "ContainmentAction",
+      "type": "object"
+    },
+    "IOCs": {
+      "additionalProperties": false,
+      "properties": {
+        "ips": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ips",
+          "type": "array"
+        },
+        "domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Domains",
+          "type": "array"
+        },
+        "urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Urls",
+          "type": "array"
+        },
+        "hashes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hashes",
+          "type": "array"
+        },
+        "emails": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Emails",
+          "type": "array"
+        },
+        "users": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Users",
+          "type": "array"
+        },
+        "cve_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cve Ids",
+          "type": "array"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "ips",
+        "domains",
+        "urls",
+        "hashes",
+        "emails",
+        "users",
+        "cve_ids",
+        "resources"
+      ],
+      "title": "IOCs",
+      "type": "object"
+    },
+    "RootCause": {
+      "additionalProperties": false,
+      "properties": {
+        "hypothesis": {
+          "title": "Hypothesis",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "basis": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Basis",
+          "type": "array"
+        }
+      },
+      "required": [
+        "hypothesis",
+        "confidence",
+        "basis"
+      ],
+      "title": "RootCause",
+      "type": "object"
+    },
+    "TimelineEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "time": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Time"
+        },
+        "event": {
+          "title": "Event",
+          "type": "string"
+        }
+      },
+      "required": [
+        "time",
+        "event"
+      ],
+      "title": "TimelineEvent",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "ticket_id": {
+      "pattern": "^INC-\\d{8}-\\d{3}$",
+      "title": "Ticket Id",
+      "type": "string"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "severity": {
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "approved"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "timeline": {
+      "items": {
+        "$ref": "#/$defs/TimelineEvent"
+      },
+      "title": "Timeline",
+      "type": "array"
+    },
+    "root_cause": {
+      "$ref": "#/$defs/RootCause"
+    },
+    "iocs": {
+      "$ref": "#/$defs/IOCs"
+    },
+    "containment_actions": {
+      "items": {
+        "$ref": "#/$defs/ContainmentAction"
+      },
+      "title": "Containment Actions",
+      "type": "array"
+    },
+    "affected_assets": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Assets",
+      "type": "array"
+    },
+    "cves": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Cves",
+      "type": "array"
+    },
+    "approved_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Approved By"
+    },
+    "approved_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Approved At"
+    },
+    "audit_ref": {
+      "title": "Audit Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ticket_id",
+    "run_id",
+    "title",
+    "severity",
+    "status",
+    "timeline",
+    "root_cause",
+    "iocs",
+    "containment_actions",
+    "affected_assets",
+    "cves",
+    "approved_by",
+    "approved_at",
+    "audit_ref"
+  ],
+  "title": "IncidentTicket",
+  "type": "object"
+}

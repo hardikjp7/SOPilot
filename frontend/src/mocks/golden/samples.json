@@ -1,0 +1,302 @@
+[
+  {
+    "id": "ALR-PHI",
+    "name": "Phishing",
+    "alert": {
+      "alert_id": "ALR-PHI",
+      "source": "synthetic-mail",
+      "synthetic": true,
+      "risk": "HIGH",
+      "rule": {
+        "code": "mail-redirect-and-sender-mismatch",
+        "confidence_pct": "92"
+      },
+      "message": {
+        "from": "sender@example.com",
+        "replyTo": "review-desk@example.net",
+        "display_name": "Internal Document Review",
+        "subject": "Document review expires today",
+        "url": "https://example.com/login",
+        "recipient": "analyst@example.org",
+        "headers": {
+          "Message-ID": "<synthetic-msg-0042@example.com>",
+          "Authentication-Results": "mail.example.org; spf=fail; dkim=none; dmarc=fail",
+          "Received": "from relay.example.net (203.0.113.42) by mail.example.org"
+        },
+        "links": [
+          {
+            "display": "https://documents.example.org/review",
+            "href": "https://example.com/login",
+            "redirects": [
+              "https://review.example.net/session"
+            ]
+          }
+        ],
+        "attachments": [],
+        "delivery_state": "delivered"
+      },
+      "timestamp": "2026-11-18T09:00:00Z",
+      "userReport": {
+        "reported_at": "2026-11-18T09:06:12+00:00",
+        "comment": "The sender looked familiar, but the sign-in page address changed. I closed it without entering any information.",
+        "clicked": true
+      },
+      "scanner_context": {
+        "product": "Training Link Inspector 2.0",
+        "potential_cve": "CVE-2099-900002",
+        "note": "Fictional exercise association; this finding alone does not establish exploitation."
+      }
+    }
+  },
+  {
+    "id": "ALR-RAN",
+    "name": "Ransomware",
+    "alert": {
+      "alert_id": "ALR-RAN",
+      "source": "synthetic-edr",
+      "synthetic": true,
+      "severity": 5,
+      "host": {
+        "ip": "192.0.2.10",
+        "name": "host.example.com",
+        "addresses": [
+          "192.0.2.10",
+          "2001:db8:10::10"
+        ],
+        "assetTag": "LAB-ENDPOINT-010"
+      },
+      "events": [
+        {
+          "TimeCreated": "2026-11-18T08:58:42Z",
+          "kind": "file_rename_burst",
+          "count": "418",
+          "new_suffix": ".lablocked",
+          "window_seconds": 45
+        },
+        {
+          "TimeCreated": "2026-11-18T08:59:04+00:00",
+          "kind": "recovery_copy_delete_attempt",
+          "outcome": "blocked",
+          "process_ref": "proc-synthetic-771"
+        },
+        "Mass file renames on the lab host; recovery-copy deletion was attempted."
+      ],
+      "process": {
+        "image": "C:\\Lab\\synthetic-file-worker.exe",
+        "pid": 771,
+        "parent": {
+          "image": "C:\\Lab\\exercise-runner.exe",
+          "pid": "640"
+        },
+        "user": "synthetic-user",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "fingerprint_note": "Synthetic placeholder digest, not an observed malware hash."
+      },
+      "recovery": {
+        "last_known_good": "2026-11-17T23:00:00Z",
+        "backup_product": "Training Backup Coordinator 3.0",
+        "finding_refs": [
+          "CVE-2099-900004"
+        ],
+        "isolation_state": "pending_analyst_review"
+      },
+      "timestamp": "2026-11-18T09:00:00Z",
+      "notes": [
+        "All telemetry is fabricated for an exercise.",
+        "Share impact has not been established."
+      ]
+    }
+  },
+  {
+    "id": "ALR-CRD",
+    "name": "Credential stuffing",
+    "alert": {
+      "alert_id": "ALR-CRD",
+      "source": "synthetic-auth",
+      "synthetic": true,
+      "priority": "P2",
+      "network": {
+        "src_ip": "198.51.100.23",
+        "forwardedFor": "198.51.100.23, 192.0.2.80",
+        "observed_sources": [
+          "198.51.100.23",
+          "203.0.113.18",
+          "2001:db8:20::23"
+        ],
+        "destination": "signin.example.org"
+      },
+      "username": "synthetic-user",
+      "failedLogins": "1843",
+      "window": {
+        "from": "2026-11-18T08:55:00Z",
+        "to": "2026-11-18T09:00:00Z",
+        "seconds": 300
+      },
+      "application": {
+        "name": "Training Login Gateway 4.0",
+        "route": "https://signin.example.org/session",
+        "method": "POST",
+        "relatedFinding": "CVE-2099-900007"
+      },
+      "aggregates": {
+        "accounts_seen": 126,
+        "success_count": "2",
+        "distinct_client_fingerprints": 3
+      },
+      "sampleEvents": [
+        {
+          "at": "2026-11-18T08:58:03Z",
+          "account": "synthetic-user",
+          "result": "DENY",
+          "src": "198.51.100.23"
+        },
+        {
+          "at": "2026-11-18T08:59:21Z",
+          "principal": "lab-user-002",
+          "result": "allow",
+          "src": "203.0.113.18",
+          "challenge_passed": null
+        }
+      ],
+      "timestamp": "2026-11-18T09:00:00Z",
+      "analyst_note": "Synthetic authentication outcomes only; no passwords, tokens, or session cookies were collected. Successful events still require account-owner review."
+    }
+  },
+  {
+    "id": "ALR-S3",
+    "name": "Public S3 bucket",
+    "alert": {
+      "alert_id": "ALR-S3",
+      "source": "synthetic-cloud",
+      "synthetic": true,
+      "Severity": "high",
+      "resource": "s3://sopilot-example-bucket",
+      "resourceDetails": {
+        "bucketName": "sopilot-example-bucket",
+        "owner_team": "training-data-owners",
+        "environment": "isolated-lab",
+        "intended_access": "private",
+        "classification": "synthetic-internal"
+      },
+      "finding": {
+        "public": true,
+        "public_access_block": {
+          "blockPublicPolicy": false,
+          "restrict_public_buckets": "false"
+        },
+        "policy_excerpt": {
+          "effect": "Allow",
+          "principal": "*",
+          "actions": [
+            "s3:GetObject"
+          ]
+        },
+        "configuration_source": "Training Bucket Manager 2.0",
+        "findingRef": "CVE-2099-900011"
+      },
+      "accessLogSample": [
+        {
+          "time": "2026-11-18T08:51:03Z",
+          "remote_ip": "203.0.113.72",
+          "requester": "anonymous",
+          "operation": "GET",
+          "status": 200,
+          "object_key": "training/demo-records.json"
+        }
+      ],
+      "change": {
+        "observed_at": "2026-11-18T08:48:00Z",
+        "actor": {
+          "principal": "lab-deployment-role"
+        }
+      },
+      "timestamp": "2026-11-18T09:00:00Z",
+      "auditCoverage": {
+        "complete": false,
+        "missing_window_minutes": 12
+      },
+      "note": "Fictional bucket and objects. The log sample does not establish the full exposure scope."
+    }
+  },
+  {
+    "id": "ALR-AMBIGUOUS",
+    "name": "Ambiguous",
+    "alert": {
+      "alert_id": "ALR-AMBIGUOUS",
+      "source": "synthetic-mail",
+      "synthetic": true,
+      "priority": "review",
+      "message": "Possible suspicious message; no headers or URLs supplied.",
+      "report": {
+        "submitted_by": "lab-user-003",
+        "channel": "helpdesk",
+        "text": "A browser tab opened while I was checking a document reminder. It could have been an expected notification; I do not have the message anymore.",
+        "sender": null,
+        "link": "",
+        "opened_attachment": "not sure"
+      },
+      "device": {
+        "name": "review-host.example.org",
+        "last_ip": "192.0.2.44"
+      },
+      "signals": [
+        {
+          "name": "user_report",
+          "confidence": 0.52
+        },
+        {
+          "name": "endpoint_scan",
+          "result": "no_findings"
+        },
+        {
+          "name": "sign_in_review",
+          "result": "not_available"
+        }
+      ],
+      "received_local": "09:12, timezone not supplied",
+      "correlation": {
+        "mail_message_id": null,
+        "related_alerts": []
+      },
+      "comment": "Insufficient evidence to establish a phishing attempt, account compromise, or another supported incident type. Synthetic exercise only."
+    }
+  },
+  {
+    "id": "ALR-NOMATCH",
+    "name": "No matching playbook",
+    "alert": {
+      "alert_id": "ALR-NOMATCH",
+      "synthetic": true,
+      "message": "Synthetic temperature sensor warning; no security procedure matches.",
+      "collector": {
+        "label": "training-facilities",
+        "product": "Training Sensor Dashboard 1.0"
+      },
+      "eventType": "environmental.temperature_threshold",
+      "level": "warning",
+      "sensor": {
+        "id": "LAB-ROOM-SENSOR-07",
+        "host": "sensor.example.net",
+        "ip_v6": "2001:db8:30::7",
+        "readings": [
+          {
+            "metric": "temperature_c",
+            "value": "31.8"
+          },
+          {
+            "metric": "fan_rpm",
+            "value": 0
+          }
+        ],
+        "threshold_c": 29.0
+      },
+      "timestamp": "2026-11-18T09:00:00Z",
+      "maintenance": {
+        "work_order": "LAB-WO-022",
+        "assigned_group": "facilities-operators",
+        "state": "awaiting_review"
+      },
+      "context": "Environmental telemetry only. No mail, authentication, encryption, traffic-flood, or object-storage exposure evidence is supplied."
+    }
+  }
+]

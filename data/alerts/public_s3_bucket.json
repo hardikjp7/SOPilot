@@ -1,0 +1,32 @@
+{
+  "alert_id": "ALR-S3",
+  "source": "synthetic-cloud",
+  "synthetic": true,
+  "Severity": "high",
+  "resource": "s3://sopilot-example-bucket",
+  "resourceDetails": {
+    "bucketName": "sopilot-example-bucket",
+    "owner_team": "training-data-owners",
+    "environment": "isolated-lab",
+    "intended_access": "private",
+    "classification": "synthetic-internal"
+  },
+  "finding": {
+    "public": true,
+    "public_access_block": {"blockPublicPolicy": false, "restrict_public_buckets": "false"},
+    "policy_excerpt": {
+      "effect": "Allow",
+      "principal": "*",
+      "actions": ["s3:GetObject"]
+    },
+    "configuration_source": "Training Bucket Manager 2.0",
+    "findingRef": "CVE-2099-900011"
+  },
+  "accessLogSample": [
+    {"time": "2026-11-18T08:51:03Z", "remote_ip": "203.0.113.72", "requester": "anonymous", "operation": "GET", "status": 200, "object_key": "training/demo-records.json"}
+  ],
+  "change": {"observed_at": "2026-11-18T08:48:00Z", "actor": {"principal": "lab-deployment-role"}},
+  "timestamp": "2026-11-18T09:00:00Z",
+  "auditCoverage": {"complete": false, "missing_window_minutes": 12},
+  "note": "Fictional bucket and objects. The log sample does not establish the full exposure scope."
+}

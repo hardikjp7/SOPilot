@@ -1,0 +1,44 @@
+{
+  "alert_id": "ALR-RAN",
+  "source": "synthetic-edr",
+  "synthetic": true,
+  "severity": 5,
+  "host": {
+    "ip": "192.0.2.10",
+    "name": "host.example.com",
+    "addresses": ["192.0.2.10", "2001:db8:10::10"],
+    "assetTag": "LAB-ENDPOINT-010"
+  },
+  "events": [
+    {
+      "TimeCreated": "2026-11-18T08:58:42Z",
+      "kind": "file_rename_burst",
+      "count": "418",
+      "new_suffix": ".lablocked",
+      "window_seconds": 45
+    },
+    {
+      "TimeCreated": "2026-11-18T08:59:04+00:00",
+      "kind": "recovery_copy_delete_attempt",
+      "outcome": "blocked",
+      "process_ref": "proc-synthetic-771"
+    },
+    "Mass file renames on the lab host; recovery-copy deletion was attempted."
+  ],
+  "process": {
+    "image": "C:\\Lab\\synthetic-file-worker.exe",
+    "pid": 771,
+    "parent": {"image": "C:\\Lab\\exercise-runner.exe", "pid": "640"},
+    "user": "synthetic-user",
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "fingerprint_note": "Synthetic placeholder digest, not an observed malware hash."
+  },
+  "recovery": {
+    "last_known_good": "2026-11-17T23:00:00Z",
+    "backup_product": "Training Backup Coordinator 3.0",
+    "finding_refs": ["CVE-2099-900004"],
+    "isolation_state": "pending_analyst_review"
+  },
+  "timestamp": "2026-11-18T09:00:00Z",
+  "notes": ["All telemetry is fabricated for an exercise.", "Share impact has not been established."]
+}

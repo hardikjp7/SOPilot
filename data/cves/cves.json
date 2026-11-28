@@ -1,0 +1,137 @@
+[
+  {
+    "id": "CVE-2099-900001",
+    "cvss": 7.5,
+    "severity": "high",
+    "affected_product": "Training Mail Relay 1.0",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab relay fails to display a mismatch between the envelope sender and the reply-to address.",
+    "remediation": "In the exercise, apply the lab relay's sender-consistency update and review messages delivered before the update.",
+    "related_playbooks": ["PB-PHI"]
+  },
+  {
+    "id": "CVE-2099-900002",
+    "cvss": 6.1,
+    "severity": "medium",
+    "affected_product": "Training Link Inspector 2.0",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab inspector evaluates the initial link but omits the final destination of a redirect chain.",
+    "remediation": "Enable final-destination inspection in the lab build and rescan affected synthetic messages.",
+    "related_playbooks": ["PB-PHI"]
+  },
+  {
+    "id": "CVE-2099-900003",
+    "cvss": 8.1,
+    "severity": "high",
+    "affected_product": "Training Session Broker 1.4",
+    "description": "Fictional training-only vulnerability, not a published CVE: simulated account recovery does not invalidate the account's existing sessions.",
+    "remediation": "Apply the exercise build that invalidates prior sessions and verify the approved recovery workflow with a synthetic account.",
+    "related_playbooks": ["PB-PHI", "PB-CRD"]
+  },
+  {
+    "id": "CVE-2099-900004",
+    "cvss": 9.1,
+    "severity": "critical",
+    "affected_product": "Training Backup Coordinator 3.0",
+    "description": "Fictional training-only vulnerability, not a published CVE: a lab backup operator role can modify recovery points intended to be immutable.",
+    "remediation": "Apply the lab role-boundary fix, protect known-good recovery points, and test restore integrity before reconnecting recovered systems.",
+    "related_playbooks": ["PB-RAN"]
+  },
+  {
+    "id": "CVE-2099-900005",
+    "cvss": 7.8,
+    "severity": "high",
+    "affected_product": "Training Endpoint Watcher 2.2",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab endpoint watcher drops rapid file-rename events when its local queue reaches capacity.",
+    "remediation": "Install the exercise queue-handling update and verify file-change telemetry against a synthetic rename workload.",
+    "related_playbooks": ["PB-RAN"]
+  },
+  {
+    "id": "CVE-2099-900006",
+    "cvss": 8.8,
+    "severity": "high",
+    "affected_product": "Training Share Controller 1.1",
+    "description": "Fictional training-only vulnerability, not a published CVE: a simulated read-only share group retains write access after a policy change.",
+    "remediation": "Apply the lab permission-cache correction and verify effective access for synthetic service identities before restoring share connectivity.",
+    "related_playbooks": ["PB-RAN"]
+  },
+  {
+    "id": "CVE-2099-900007",
+    "cvss": 7.3,
+    "severity": "high",
+    "affected_product": "Training Login Gateway 4.0",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab login gateway resets per-account rate counters when requests alternate between synthetic ingress nodes.",
+    "remediation": "Deploy the exercise shared-counter update and validate rate limits across all lab ingress nodes using non-secret test inputs.",
+    "related_playbooks": ["PB-CRD"]
+  },
+  {
+    "id": "CVE-2099-900008",
+    "cvss": 6.5,
+    "severity": "medium",
+    "affected_product": "Training Identity Console 2.5",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab identity console omits successful sign-ins from a mixed failed-and-successful authentication summary.",
+    "remediation": "Apply the exercise aggregation correction and review raw authentication events for the affected synthetic accounts.",
+    "related_playbooks": ["PB-CRD"]
+  },
+  {
+    "id": "CVE-2099-900009",
+    "cvss": 7.5,
+    "severity": "high",
+    "affected_product": "Training Edge Router 1.8",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab edge router retains expired connection records until its request queue is exhausted.",
+    "remediation": "Apply the exercise connection-expiry fix, enable the approved mitigation profile, and verify service health with synthetic traffic.",
+    "related_playbooks": ["PB-DOS"]
+  },
+  {
+    "id": "CVE-2099-900010",
+    "cvss": 5.9,
+    "severity": "medium",
+    "affected_product": "Training Request Filter 3.1",
+    "description": "Fictional training-only vulnerability, not a published CVE: a lab route alias bypasses the route's intended request-rate limit.",
+    "remediation": "Apply the exercise route-normalization update and confirm that the approved rate policy covers each synthetic route alias.",
+    "related_playbooks": ["PB-DOS", "PB-CRD"]
+  },
+  {
+    "id": "CVE-2099-900011",
+    "cvss": 8.2,
+    "severity": "high",
+    "affected_product": "Training Bucket Manager 2.0",
+    "description": "Fictional training-only vulnerability, not a published CVE: a lab deployment template restores a public-read grant after an operator removes it.",
+    "remediation": "Correct the exercise deployment template, remove the unintended public grant through change control, and verify that redeployment keeps access private.",
+    "related_playbooks": ["PB-S3"]
+  },
+  {
+    "id": "CVE-2099-900012",
+    "cvss": 6.8,
+    "severity": "medium",
+    "affected_product": "Training Object Audit 1.6",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab object-audit collector omits anonymous reads from an exposure report.",
+    "remediation": "Apply the exercise audit correction and compare the report with preserved access logs; record any remaining gaps in the exposure assessment.",
+    "related_playbooks": ["PB-S3"]
+  },
+  {
+    "id": "CVE-2099-900013",
+    "cvss": 9.0,
+    "severity": "critical",
+    "affected_product": "Training Storage Policy Engine 3.3",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab policy engine treats an unspecified principal as a public write grant.",
+    "remediation": "Apply the exercise principal-validation fix and verify both denied anonymous writes and the intended private application access.",
+    "related_playbooks": ["PB-S3"]
+  },
+  {
+    "id": "CVE-2099-900014",
+    "cvss": 3.1,
+    "severity": "low",
+    "affected_product": "Training Sensor Dashboard 1.0",
+    "description": "Fictional training-only vulnerability, not a published CVE: the lab sensor dashboard exposes a non-sensitive room label to another synthetic operator role.",
+    "remediation": "Apply the exercise display-scope correction and refer the finding to the facilities application owner; no SOC playbook is linked.",
+    "related_playbooks": []
+  },
+  {
+    "id": "CVE-2099-900015",
+    "cvss": 4.3,
+    "severity": "medium",
+    "affected_product": "Training Print Queue 2.1",
+    "description": "Fictional training-only vulnerability, not a published CVE: a lab queue status endpoint reveals synthetic job titles across test operator groups.",
+    "remediation": "Apply the exercise queue-visibility fix and request review from the application owner; no SOC containment procedure is inferred.",
+    "related_playbooks": []
+  }
+]

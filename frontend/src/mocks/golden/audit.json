@@ -1,0 +1,182 @@
+[
+  {
+    "id": 31,
+    "run_id": "RUN-9f3f77f18ec0",
+    "stage": "parse",
+    "ts": "2026-11-18T18:48:54.292578+00:00",
+    "model": "genailab-maas-gpt-5.4-mini",
+    "input_hash": "a776f0f8e6d96a7ccadebc2c6a2255536bb72803350dfe304732afd7bcd77d6e",
+    "output_hash": "3a1e35daf2585be1d27f79fca64cb49a7a5bb9081c9d47dbc7c4fe7fd7493ae3",
+    "details_json": {
+      "alert_hash": "a776f0f8e6d96a7ccadebc2c6a2255536bb72803350dfe304732afd7bcd77d6e",
+      "calls": [
+        {
+          "input_tokens": 1192,
+          "latency_ms": 2370.692,
+          "model": "genailab-maas-gpt-5.4-mini",
+          "ok": true,
+          "output_tokens": 171,
+          "stage": "parse",
+          "ts": "2026-11-18T18:48:56.681880+00:00",
+          "used_fallback": false
+        }
+      ],
+      "completed_at": "2026-11-18T18:48:56.682538+00:00"
+    }
+  },
+  {
+    "id": 32,
+    "run_id": "RUN-9f3f77f18ec0",
+    "stage": "retrieve",
+    "ts": "2026-11-18T18:48:56.682555+00:00",
+    "model": "azure/genailab-maas-text-embedding-3-large",
+    "input_hash": "3a1e35daf2585be1d27f79fca64cb49a7a5bb9081c9d47dbc7c4fe7fd7493ae3",
+    "output_hash": "7798554755c4db332f9e859f7b1dc8e95f40c8ff13de25984790d4c89561c0e9",
+    "details_json": {
+      "alert_hash": "a776f0f8e6d96a7ccadebc2c6a2255536bb72803350dfe304732afd7bcd77d6e",
+      "calls": [
+        {
+          "input_tokens": 78,
+          "latency_ms": 1715.434,
+          "model": "azure/genailab-maas-text-embedding-3-large",
+          "ok": true,
+          "output_tokens": 0,
+          "stage": "retrieve",
+          "ts": "2026-11-18T18:48:59.065805+00:00",
+          "used_fallback": false
+        }
+      ],
+      "chunk_ids": [
+        "PB-PHI-01",
+        "PB-PHI-05",
+        "PB-PHI-03",
+        "PB-PHI-02",
+        "PB-PHI-06",
+        "PB-PHI-09"
+      ],
+      "completed_at": "2026-11-18T18:48:59.069616+00:00",
+      "margin": 0.08270613197463572,
+      "retrieval_confidence": 0.41280859277300064
+    }
+  },
+  {
+    "id": 33,
+    "run_id": "RUN-9f3f77f18ec0",
+    "stage": "generate",
+    "ts": "2026-11-18T18:48:59.069681+00:00",
+    "model": "genailab-maas-gpt-5.4",
+    "input_hash": "360b1f3bc8b6c4972eed06963e47775dd05e079f82a84f9726926f95f93830a0",
+    "output_hash": "24a78c2d860e52ba932eb92a994e732e228b0ef6abe5573a1df53af31b1a6d5d",
+    "details_json": {
+      "alert_hash": "a776f0f8e6d96a7ccadebc2c6a2255536bb72803350dfe304732afd7bcd77d6e",
+      "calls": [
+        {
+          "input_tokens": 1714,
+          "latency_ms": 1464.896,
+          "model": "genailab-maas-gpt-5.4",
+          "ok": true,
+          "output_tokens": 26,
+          "stage": "generate",
+          "ts": "2026-11-18T18:49:00.535185+00:00",
+          "used_fallback": false
+        },
+        {
+          "input_tokens": 1860,
+          "latency_ms": 10793.736,
+          "model": "genailab-maas-gpt-5.4",
+          "ok": true,
+          "output_tokens": 948,
+          "stage": "generate",
+          "ts": "2026-11-18T18:49:09.863508+00:00",
+          "used_fallback": false
+        }
+      ],
+      "completed_at": "2026-11-18T18:49:09.864244+00:00",
+      "skipped": false
+    }
+  },
+  {
+    "id": 34,
+    "run_id": "RUN-9f3f77f18ec0",
+    "stage": "verify",
+    "ts": "2026-11-18T18:49:09.864278+00:00",
+    "model": "genailab-maas-gpt-5.4-mini",
+    "input_hash": "24a78c2d860e52ba932eb92a994e732e228b0ef6abe5573a1df53af31b1a6d5d",
+    "output_hash": "db70405431362f5a7f7bf799507337b4a4060b245dfbad95b670afc6d44a423a",
+    "details_json": {
+      "alert_hash": "a776f0f8e6d96a7ccadebc2c6a2255536bb72803350dfe304732afd7bcd77d6e",
+      "calls": [
+        {
+          "input_tokens": 1154,
+          "latency_ms": 1836.684,
+          "model": "genailab-maas-gpt-5.4-mini",
+          "ok": true,
+          "output_tokens": 211,
+          "stage": "verify",
+          "ts": "2026-11-18T18:49:11.722782+00:00",
+          "used_fallback": false
+        }
+      ],
+      "completed_at": "2026-11-18T18:49:11.723209+00:00",
+      "dropped_ids": [],
+      "verdicts": [
+        {
+          "order": 1,
+          "reason": "Matches the cited detect step: review the reported message headers and URL in the mail security console.",
+          "support": "supported"
+        },
+        {
+          "order": 2,
+          "reason": "Matches the cited contain step: quarantine the reported message using the mail security console.",
+          "support": "supported"
+        },
+        {
+          "order": 3,
+          "reason": "Matches the cited investigate step: review sign-in logs for the reported account for suspicious activity.",
+          "support": "supported"
+        },
+        {
+          "order": 4,
+          "reason": "Matches the cited investigate step: search mail telemetry for messages sharing the confirmed sender, subject, or URL and record affected recipients.",
+          "support": "supported"
+        },
+        {
+          "order": 5,
+          "reason": "Matches the cited contain step, including the stated condition and controls: after analyst confirmation, block the malicious sender and URL with an expiry and rollback owner.",
+          "support": "supported"
+        },
+        {
+          "order": 6,
+          "reason": "Matches the cited recover step: confirm affected users can sign in safely and monitor accounts for repeated suspicious activity.",
+          "support": "supported"
+        }
+      ]
+    }
+  },
+  {
+    "id": 55,
+    "run_id": "RUN-9f3f77f18ec0",
+    "stage": "ticket",
+    "ts": "2026-11-18T18:50:15.351705+00:00",
+    "model": "genailab-maas-gpt-5.4",
+    "input_hash": "d80f995e5e59d8ac5f95cca3090b84f4e9f37cb0d26606154b7c5e9975b2a813",
+    "output_hash": "7b71ccb5f1d52bda42e7320430e9d3355e146706e5127b1ad975fd30b13bbe21",
+    "details_json": {
+      "alert_hash": "a776f0f8e6d96a7ccadebc2c6a2255536bb72803350dfe304732afd7bcd77d6e"
+    }
+  },
+  {
+    "id": 56,
+    "run_id": "RUN-9f3f77f18ec0",
+    "stage": "approve",
+    "ts": "2026-11-18T18:50:15.364360+00:00",
+    "model": null,
+    "input_hash": "7b71ccb5f1d52bda42e7320430e9d3355e146706e5127b1ad975fd30b13bbe21",
+    "output_hash": "d135500a591c5d48de2eec43fdcb780f81799a0d78dcb69b903f5987738d6503",
+    "details_json": {
+      "alert_hash": "a776f0f8e6d96a7ccadebc2c6a2255536bb72803350dfe304732afd7bcd77d6e",
+      "analyst_name": "Demo Analyst",
+      "decision": "approved"
+    }
+  }
+]

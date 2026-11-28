@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .dark {
+    color-scheme: dark;
+    --canvas: 11 17 32;
+    --panel: 17 24 39;
+    --content: 226 232 240;
+    --muted: 148 163 184;
+    --outline: 100 116 139;
+    --focus: 147 197 253;
+    --accent: 110 231 183;
+    --on-accent: 5 46 35;
+    --severity-critical: 248 113 113;
+    --severity-high: 251 146 60;
+    --severity-medium: 251 191 36;
+    --severity-low: 96 165 250;
+    --checklist-grounded: 74 222 128;
+    --checklist-low-confidence: 251 191 36;
+    --checklist-no-matching-sop: 253 164 175;
+  }
+
+  .light {
+    color-scheme: light;
+    --canvas: 248 250 252;
+    --panel: 255 255 255;
+    --content: 15 23 42;
+    --muted: 71 85 105;
+    --outline: 100 116 139;
+    --focus: 29 78 216;
+    --accent: 4 120 87;
+    --on-accent: 255 255 255;
+    --severity-critical: 185 28 28;
+    --severity-high: 154 52 18;
+    --severity-medium: 133 77 14;
+    --severity-low: 29 78 216;
+    --checklist-grounded: 21 128 61;
+    --checklist-low-confidence: 133 77 14;
+    --checklist-no-matching-sop: 159 18 57;
+  }
+
+  html[data-text-size='large'] {
+    font-size: 20px;
+  }
+
+  body {
+    @apply m-0 bg-canvas font-sans text-content antialiased;
+  }
+
+  button,
+  a,
+  select,
+  textarea,
+  input,
+  summary,
+  [tabindex] {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus;
+  }
+
+  .focus-target:focus {
+    @apply outline outline-2 outline-offset-4 outline-focus;
+  }
+
+  input,
+  select,
+  textarea {
+    scroll-margin-block: 2rem;
+  }
+
+  .status-legend > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .status-legend[open] .legend-chevron {
+    transform: rotate(180deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition: none !important;
+    }
+  }
+}
+
+@layer components {
+  .control {
+    @apply rounded-lg border border-outline bg-canvas text-content disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .button-primary {
+    @apply inline-flex min-h-11 items-center gap-2 rounded-lg bg-accent px-4 font-semibold text-on-accent hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .button-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-outline bg-panel px-3 font-medium text-content hover:bg-content/10 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}

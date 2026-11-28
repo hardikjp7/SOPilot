@@ -1,0 +1,13 @@
+CASE-clean-phishing: grounded
+CASE-clean-ransomware: no_matching_sop
+CASE-clean-credential_stuffing: grounded
+CASE-clean-public_s3_bucket: grounded
+CASE-clean-ddos: no_matching_sop
+CASE-reworded-phishing: no_matching_sop
+CASE-reworded-ransomware: no_matching_sop
+CASE-ambiguous: no_matching_sop
+CASE-no-match-temperature: no_matching_sop
+CASE-no-match-print: no_matching_sop
+CASE-injection: no_matching_sop
+CASE-missing-fields: no_matching_sop
+Wrote /home/labuser/Desktop/Project/2791366_4A/eval/runs/20261121T145259Z/report.md and /home/labuser/Desktop/Project/2791366_4A/eval/runs/20261121T145259Z/results.json; exit 0

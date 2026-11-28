@@ -1,0 +1,5 @@
+{
+  "purpose": "freeze verification",
+  "threshold_source": "explicit process environment; user-selected 0.29/0.03",
+  "live": true
+}

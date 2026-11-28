@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "IOCs": {
+      "additionalProperties": false,
+      "properties": {
+        "ips": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ips",
+          "type": "array"
+        },
+        "domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Domains",
+          "type": "array"
+        },
+        "urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Urls",
+          "type": "array"
+        },
+        "hashes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hashes",
+          "type": "array"
+        },
+        "emails": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Emails",
+          "type": "array"
+        },
+        "users": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Users",
+          "type": "array"
+        },
+        "cve_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cve Ids",
+          "type": "array"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "ips",
+        "domains",
+        "urls",
+        "hashes",
+        "emails",
+        "users",
+        "cve_ids",
+        "resources"
+      ],
+      "title": "IOCs",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "alert_id": {
+      "title": "Alert Id",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "timestamp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Timestamp"
+    },
+    "attack_type": {
+      "enum": [
+        "phishing",
+        "ransomware",
+        "credential_stuffing",
+        "ddos",
+        "public_s3_bucket",
+        "unknown"
+      ],
+      "title": "Attack Type",
+      "type": "string"
+    },
+    "severity": {
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "iocs": {
+      "$ref": "#/$defs/IOCs"
+    },
+    "evidence_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Fields",
+      "type": "array"
+    },
+    "redacted": {
+      "title": "Redacted",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "alert_id",
+    "source",
+    "timestamp",
+    "attack_type",
+    "severity",
+    "confidence",
+    "summary",
+    "iocs",
+    "evidence_fields",
+    "redacted"
+  ],
+  "title": "ParsedAlert",
+  "type": "object"
+}

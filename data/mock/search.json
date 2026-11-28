@@ -1,0 +1,92 @@
+[
+  {
+    "playbook_id": "PB-PHI",
+    "step_id": "PB-PHI-01",
+    "text": "PB-PHI-01 | Detect | Review the reported message headers and URL in the mail security console. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-PHI",
+    "step_id": "PB-PHI-02",
+    "text": "PB-PHI-02 | Contain | Quarantine the reported message using the mail security console. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-PHI",
+    "step_id": "PB-PHI-03",
+    "text": "PB-PHI-03 | Investigate | Review sign-in logs for the reported account for suspicious activity. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-RAN",
+    "step_id": "PB-RAN-01",
+    "text": "PB-RAN-01 | Detect | Confirm encryption activity on the reported host in the EDR console. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-RAN",
+    "step_id": "PB-RAN-02",
+    "text": "PB-RAN-02 | Contain | Isolate the affected host from the network via EDR. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-RAN",
+    "step_id": "PB-RAN-03",
+    "text": "PB-RAN-03 | Escalate | Notify the incident commander with the host and alert evidence. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-CRD",
+    "step_id": "PB-CRD-01",
+    "text": "PB-CRD-01 | Detect | Confirm the failed login burst in authentication logs. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-CRD",
+    "step_id": "PB-CRD-02",
+    "text": "PB-CRD-02 | Contain | Apply the approved temporary rate limit to the affected login endpoint. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-CRD",
+    "step_id": "PB-CRD-03",
+    "text": "PB-CRD-03 | Investigate | Review successful sign-ins associated with the alert. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-DOS",
+    "step_id": "PB-DOS-01",
+    "text": "PB-DOS-01 | Detect | Confirm the traffic surge and service impact in monitoring. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-DOS",
+    "step_id": "PB-DOS-02",
+    "text": "PB-DOS-02 | Contain | Enable the approved DDoS mitigation profile for the affected service. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-DOS",
+    "step_id": "PB-DOS-03",
+    "text": "PB-DOS-03 | Escalate | Notify the network incident lead of the service impact. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-S3",
+    "step_id": "PB-S3-01",
+    "text": "PB-S3-01 | Detect | Confirm public access on the reported bucket in the cloud console. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-S3",
+    "step_id": "PB-S3-02",
+    "text": "PB-S3-02 | Contain | Enable Block Public Access on the reported bucket after owner confirmation. | SOC Tier 2",
+    "score": 0.95
+  },
+  {
+    "playbook_id": "PB-S3",
+    "step_id": "PB-S3-03",
+    "text": "PB-S3-03 | Investigate | Review the bucket access logs for unexpected downloads. | SOC Tier 2",
+    "score": 0.95
+  }
+]
